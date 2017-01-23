@@ -6,25 +6,33 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.WindowEvent;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRootPane;
 
 
-public class View extends JFrame {
+public class View {
 	
 private JPanel topPanel,bottomPanel,centerPanel,westPanel,eastPanel; 
-private JButton[][] gameButtons; 
+private JButton[][] gameButtons;
+public JButton[] mainButtons; 
 private static View firstInstance = null; 
+private JButton exitButton; 
+private static JFrame mainframe; 
+
 	
 private View(){
 	
 	createWindow();
 	createGameButtons(4,4); 
-	setVisible(true);
-	
-	
+	createExitButton(); 
+	mainframe.setVisible(true);
+	removeRootPane();
+		
 }
 
 public static View getInstance(){
@@ -35,10 +43,23 @@ public static View getInstance(){
 	}
 	return firstInstance; 
 }
+
+public static void closeWindow(){
+	
+	mainframe.dispatchEvent(new WindowEvent(mainframe, WindowEvent.WINDOW_CLOSING));
+	
+}
+
+public static void setInstance(){
+		
+		firstInstance =null; 
+	
+}
 public void createWindow() {
 	
-	setPreferredSize(new Dimension(600,800));
-    getContentPane().setLayout(new BorderLayout());
+	mainframe= new JFrame(); 
+	mainframe.setPreferredSize(new Dimension(600,800));
+    mainframe.getContentPane().setLayout(new BorderLayout());
 
     
     topPanel= new JPanel(); 
@@ -47,40 +68,39 @@ public void createWindow() {
     label.setForeground(new Color(255,255,255));
     
     
-	topPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+	topPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
     topPanel.setPreferredSize(new Dimension(200, 120));
     topPanel.setBackground(new Color(46,46,46));
-    add(topPanel,BorderLayout.NORTH); 
+    mainframe.add(topPanel,BorderLayout.NORTH); 
     //topPanel.setBackground(new Color(0,0,0));
 	
 	centerPanel= new JPanel(); 
     centerPanel.setLayout(new GridLayout(4,4));
 	centerPanel.setBackground(new Color(46,46,46));
-	add(centerPanel,BorderLayout.CENTER);
+	mainframe.add(centerPanel,BorderLayout.CENTER);
 	
 	westPanel= new JPanel(); 
 	westPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
     westPanel.setPreferredSize(new Dimension(40, 0));
     westPanel.setBackground(new Color(46,46,46));
-    add(westPanel,BorderLayout.WEST); 
+    mainframe.add(westPanel,BorderLayout.WEST); 
    
     eastPanel= new JPanel(); 
 	eastPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
     eastPanel.setPreferredSize(new Dimension(40,0));
     eastPanel.setBackground(new Color(46,46,46));
-    add(eastPanel,BorderLayout.EAST); 
+    mainframe.add(eastPanel,BorderLayout.EAST); 
 	
 	
 	bottomPanel= new JPanel(); 
 	bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER,100,30));
     bottomPanel.setPreferredSize(new Dimension(0,150));
     bottomPanel.setBackground(new Color(46,46,46));
-    add(bottomPanel,BorderLayout.SOUTH); 
+    mainframe.add(bottomPanel,BorderLayout.SOUTH); 
 	
 	
-	pack();  
-	setLocationRelativeTo(null);
-	setDefaultCloseOperation(EXIT_ON_CLOSE);
+	mainframe.pack();  
+	mainframe.setLocationRelativeTo(null);
 			    
 }
 
@@ -99,6 +119,14 @@ public void createGameButtons(int x, int y){
          centerPanel.add(getGameButtons()[i][j]);     
 	}
 }	
+}
+public void createExitButton(){
+	
+	exitButton=(new JButton("X")); 
+	exitButton.setBackground(new Color(255,0,0));
+	topPanel.add(getExitButton()); 
+	
+	
 }
 	
 public void setButtonInvisible()
@@ -126,9 +154,9 @@ public void setButtonInvisible()
 		}
     }	
 }		
-	
-	
-
+public void removeRootPane(){	
+mainframe.getRootPane().setWindowDecorationStyle(JRootPane.NONE);	
+}
 
 public JButton[][] getGameButtons() {
 	return gameButtons;
@@ -136,6 +164,14 @@ public JButton[][] getGameButtons() {
 
 public void setGameButtons(JButton[][] gameButtons) {
 	this.gameButtons = gameButtons;
+}
+
+public JButton getExitButton() {
+	return exitButton;
+}
+
+public void setExitButton(JButton exitButton) {
+	this.exitButton = exitButton;
 }
 	
 };

@@ -1,6 +1,8 @@
 package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 import model.Game;
@@ -14,11 +16,32 @@ public class Controller
 	GameButtonListener gamebuttonlistner; 
     SlidePuzzleModel sModel;  
 	TicTacToeModel tModel; 
-	View view; 
-	
-	 
+	View view; 	 
+	private static Controller firstInstance = null; 
 
-public Controller(SlidePuzzleModel model){
+	
+public static Controller getInstance(SlidePuzzleModel model){
+	
+
+	if(firstInstance ==null){
+		
+		firstInstance = new Controller(model); 
+	}
+	return firstInstance; 
+}
+
+public static Controller getInstance(TicTacToeModel model){
+	
+
+	if(firstInstance ==null){
+		
+		firstInstance = new Controller(model); 
+	}
+	return firstInstance; 
+}
+
+
+private Controller(SlidePuzzleModel model){
 	
 	View view= View.getInstance();
 	model = new SlidePuzzleModel(view); 
@@ -39,9 +62,19 @@ public Controller(SlidePuzzleModel model){
 	     }
 	}
 		
+		 view.getExitButton().addActionListener(e -> {
+	            int confirmExit = JOptionPane.showConfirmDialog(null,
+	                    "Are you sure you want to exit?", null, JOptionPane.YES_NO_OPTION);
+	            if (confirmExit == JOptionPane.YES_OPTION) {
+	            	firstInstance=null; 
+	            	View.setInstance(); 
+	            	View.closeWindow();
+	            }
+	        });
+		
 }
 
-public Controller(TicTacToeModel model){
+private Controller(TicTacToeModel model){
 	
 	View view= View.getInstance();
 	model = new TicTacToeModel(view); 
@@ -51,29 +84,27 @@ public Controller(TicTacToeModel model){
 		model.updateView();
 		view.setButtonInvisible();
 		
-		GameButtonListener gamebuttonlistener = new GameButtonListener(view,model);
-		this.gamebuttonlistner = gamebuttonlistener; 
+		  GameButtonListener gamebuttonlistener = new GameButtonListener(view,model);
+		  this.gamebuttonlistner = gamebuttonlistener; 
 		
-		for (int j = 0; j< view.getGameButtons().length; j++) {
+		 for (int j = 0; j< view.getGameButtons().length; j++) {
 			
 		
 		 for (int i = 0; i < view.getGameButtons().length; i++) {
 	         view.getGameButtons()[i][j].addActionListener(gamebuttonlistner);
-	     }
-	}
+	        }
+	      }
 		
-}
-
-public static void main(String[] args)
-{
-try {
-    // select Look and Feel
-    UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
-    // start application
-} catch (Exception ex) {
-    ex.printStackTrace();
-}
-       
+		view.getExitButton().addActionListener(e -> {
+            int confirmExit = JOptionPane.showConfirmDialog(null,
+                    "Are you sure you want to exit?", null, JOptionPane.YES_NO_OPTION);
+            if (confirmExit == JOptionPane.YES_OPTION) {
+                firstInstance=null; 
+                View.setInstance(); 
+                View.closeWindow();
+            }
+        });
+		
 }
 
 
@@ -104,7 +135,6 @@ public void actionPerformed(ActionEvent e) {
 	         for(int i=0; i< view.getGameButtons().length;i++){
 	        		
 	        	 if (index==1 && e.getSource() == view.getGameButtons()[i][j]){
-	        	
 	                 model1.move(i,j); 
 	        		 model1.getMessage();
 	        		 model1.updateView(model1.getStatus(i,j)); 

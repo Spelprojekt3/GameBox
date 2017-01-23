@@ -11,12 +11,13 @@ SlidePuzzleModel model;
 	
 public SlidePuzzle(GameBox newGameBox){
 	
+	System.out.println("SlidePuzzle is online");
 	gameBox= newGameBox; 
 }
 
 	@Override
 	public void run() {
-		Controller controller = new Controller(model);
+		Controller controller = Controller.getInstance(model);
 		
 	}
 

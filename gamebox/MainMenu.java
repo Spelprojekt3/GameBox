@@ -15,12 +15,13 @@ public class MainMenu implements GameState {
 	}
 
 	@Override
-	public void run() {	
-		MainController main = new MainController(); 
+	public  void run() {	
+		MainController main = MainController.getInstance(); 
 	}
 	
 	@Override
 	public void exit() {
+		 System.exit(0);
 		// TODO Auto-generated method stub
 		
 	}
