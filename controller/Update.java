@@ -1,27 +1,23 @@
 package controller;
 
 import model.SlidePuzzleModel;
+import model.TicTacToeModel;
 import view.View;
 
 public class Update {
 
-static SlidePuzzleModel model; 
+static SlidePuzzleModel modelS; 
+static TicTacToeModel modelT;
 static View view; 
 	
-public static void updateView(){
+public static void empty(){
 	
-	    View view =View.getInstance(); 
-	    SlidePuzzleModel model = SlidePuzzleModel.getInstance(); 
+	TicTacToeModel model =TicTacToeModel.getInstance();
+	View view = View.getInstance();
+	model.emptyModel(); 
+	view.emptyView();
+ }
 
-		for(int i=0; i<model.getBoard().length;i++)
-		{
-			
-			for(int j=0; j<model.getBoard().length;j++){
-			view.getGameButtons()[i][j].setText(model.getBoard()[i][j]);
-				
-		}
 
-    }
-}	
 
 }

@@ -31,6 +31,12 @@ public class SlidePuzzleModel implements Game
 	}
 	
 
+
+	public static void reset(){
+		
+		firstInstance=null; 
+	}
+
 	public void createNumberList()
 	{
 		for (int i = 0; i < 16; i++) {

@@ -47,7 +47,7 @@ private Controller(int gameNumber){
 	View view= View.getInstance();
 	
 	if(gameNumber==1){
-	game = new TicTacToeModel();
+	game = TicTacToeModel.getInstance(); 
 	}
 	if(gameNumber==2){
 	game = SlidePuzzleModel.getInstance();
@@ -69,13 +69,16 @@ private Controller(int gameNumber){
 	        }
 	      }
 		
-		view.getExitButton().addActionListener(e -> {
+		   view.getExitButton().addActionListener(e -> {
             int confirmExit = JOptionPane.showConfirmDialog(null,
                     "Are you sure you want to exit?", null, JOptionPane.YES_NO_OPTION);
             if (confirmExit == JOptionPane.YES_OPTION) {
                 firstInstance=null; 
+                TicTacToeModel.reset();
+                SlidePuzzleModel.reset(); 
                 View.setInstance(); 
                 View.closeWindow();
+                
             }
         });
 		
@@ -101,7 +104,7 @@ public void actionPerformed(ActionEvent e) {
 	         for(int j=0; j< view.getGameButtons().length;j++){
 	        		
 	        	 if (e.getSource() == view.getGameButtons()[i][j]){
-	                 game.move(i,j); 
+	                 game.move(i,j);
 	        		 game.getMessage();
 	        		 
 	        	 for(int k=0; k< view.getGameButtons().length;k++)

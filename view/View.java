@@ -154,7 +154,19 @@ public void setButtonInvisible()
 			
 		}
     }	
-}		
+}
+
+public void emptyView(){
+	
+	for(int i=0;i<gameButtons.length;i++){
+		
+		for(int j=0;j<gameButtons.length;j++){
+		gameButtons[i][j].setText("");
+		}
+		
+	}    
+}
+
 public void removeRootPane(){	
 mainframe.getRootPane().setWindowDecorationStyle(JRootPane.NONE);	
 }

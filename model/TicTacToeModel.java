@@ -2,12 +2,13 @@ package model;
 
 import java.util.ArrayList;
 
+import controller.Update;
 import view.View;
 
 
 public class TicTacToeModel implements Game{
 	
-	
+	private static int click=0;
 	private String player1,player2;
 	private int size;  
 	private String player;
@@ -16,7 +17,7 @@ public class TicTacToeModel implements Game{
 	private ArrayList<Integer>score=new ArrayList<Integer>(); 
 	private ArrayList<Integer>dscore=new ArrayList<Integer>();
 	private View view; 
-	
+	private  static TicTacToeModel firstInstance=null; 
 	
 	
 public ArrayList<Integer> getScore() {
@@ -24,14 +25,26 @@ public ArrayList<Integer> getScore() {
 	}
 
 
-public TicTacToeModel(){
+private TicTacToeModel(){
 	
 	newBoard(); 
-	currentBoard(); 
-	//updateView(); 
+	currentBoard();  
 		
 }
 
+public static TicTacToeModel getInstance(){
+	
+	if(firstInstance ==null){
+		
+		firstInstance = new TicTacToeModel(); 
+	}
+	return firstInstance; 
+}
+
+public static void reset(){
+	
+	firstInstance=null; 
+}
 
 public void newBoard(){
 	
@@ -254,29 +267,7 @@ public void scoreBoard(String name){
 		
 		
 };
-/*
-public void updateView(String number){
-	
-	int x=getPositionZero()/10;
-	int y=getPositionZero()%10; 
-	
-	view.getGameButtons()[x][y].setText(number);
-	updateView(); 
-	view.setButtonInvisible(); 
-	
-}
 
-public  void updateView(){
-	
-	for(int i=0; i<board.length;i++)
-	{
-		
-		for(int j=0; j<board.length;j++){
-		view.getGameButtons()[i][j].setText(board[i][j]);	
-	}
-}
-}	
-*/
 public void emptyModel(){
 	
 	newBoard(); 
@@ -340,7 +331,12 @@ public boolean move(int i, int j) {
 	addCoordinatate(i,j);
 	currentBoard(); 
     nextPlayer();
+    if(checkwin()=='X'||checkwin()=='O'||checkwin()=='D')
+    {
+  	winnerIs();
+    }
 	return true;
+	
 }
 
 
