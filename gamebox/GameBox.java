@@ -15,10 +15,13 @@ public class GameBox {
 			
 	}
 	
-	public void setGameState(GameState newGameState){
+	public void setGameState(GameState newGameState) throws NullPointerException
+	
+	{
 		
 		gameState=newGameState; 
 		
+			
 		
 	}
 	

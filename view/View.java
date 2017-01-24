@@ -32,7 +32,6 @@ private View(){
 	createExitButton(); 
 	mainframe.setVisible(true);
 	removeRootPane();
-		
 }
 
 public static View getInstance(){
@@ -128,6 +127,8 @@ public void createExitButton(){
 	
 	
 }
+
+
 	
 public void setButtonInvisible()
 	{
@@ -141,7 +142,7 @@ public void setButtonInvisible()
 			   
 				gameButtons[i][j].setContentAreaFilled(false);
 			    gameButtons[i][j].setFocusable(false);
-			    gameButtons[i][j].setText(" ");
+			    gameButtons[i][j].setText("");
 			    gameButtons[i][j].setBorderPainted(false);
 			}
 			else

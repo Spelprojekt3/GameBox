@@ -8,6 +8,8 @@ public class TicTacToe implements GameState{
 GameBox gameBox; 
 TicTacToeModel model; 
 MainMenu menu;
+int index=1; 
+
 	
 public TicTacToe(GameBox newgameBox){
 	
@@ -18,7 +20,7 @@ public TicTacToe(GameBox newgameBox){
 	@Override
 	public void run() {
 	System.out.println("TicTacToe is running");
-	Controller controller =Controller.getInstance(model);
+	Controller controller =Controller.getInstance(index);
 	
 	}
 

@@ -14,77 +14,51 @@ import view.View;
 public class Controller
 {
 	GameButtonListener gamebuttonlistner; 
-    SlidePuzzleModel sModel;  
-	TicTacToeModel tModel; 
+    SlidePuzzleModel model;  
 	View view; 	 
+	Game game; 
 	private static Controller firstInstance = null; 
 
 	
-public static Controller getInstance(SlidePuzzleModel model){
+public static Controller getInstance(int i){
 	
 
 	if(firstInstance ==null){
 		
-		firstInstance = new Controller(model); 
+		firstInstance = new Controller(i); 
 	}
 	return firstInstance; 
 }
 
-public static Controller getInstance(TicTacToeModel model){
-	
+public void updateView(View view){
 
-	if(firstInstance ==null){
-		
-		firstInstance = new Controller(model); 
-	}
-	return firstInstance; 
-}
-
-
-private Controller(SlidePuzzleModel model){
-	
-	View view= View.getInstance();
-	model = new SlidePuzzleModel(view); 
-	this.view=view; 
-    this.sModel=model; 
-	 
-		model.updateView();
-		view.setButtonInvisible();
-		
-		GameButtonListener gamebuttonlistener = new GameButtonListener(view,model);
-		this.gamebuttonlistner = gamebuttonlistener; 
-		
-		for (int j = 0; j< view.getGameButtons().length; j++) {
+	 for(int i=0; i< view.getGameButtons().length;i++)
+	 {  
+		for(int j=0; j<view.getGameButtons().length;j++){
+	     view.getGameButtons()[i][j].setText(game.getStatus(i,j));
+		 }
+	  }
 			
-		
-		 for (int i = 0; i < view.getGameButtons().length; i++) {
-	         view.getGameButtons()[i][j].addActionListener(gamebuttonlistner);
-	     }
-	}
-		
-		 view.getExitButton().addActionListener(e -> {
-	            int confirmExit = JOptionPane.showConfirmDialog(null,
-	                    "Are you sure you want to exit?", null, JOptionPane.YES_NO_OPTION);
-	            if (confirmExit == JOptionPane.YES_OPTION) {
-	            	firstInstance=null; 
-	            	View.setInstance(); 
-	            	View.closeWindow();
-	            }
-	        });
-		
 }
 
-private Controller(TicTacToeModel model){
+private Controller(int gameNumber){
+	
 	
 	View view= View.getInstance();
-	model = new TicTacToeModel(view); 
+	
+	if(gameNumber==1){
+	game = new TicTacToeModel();
+	}
+	if(gameNumber==2){
+	game = SlidePuzzleModel.getInstance();
+	updateView(view);
+	view.setButtonInvisible();
+	}	
 	this.view=view; 
-    this.tModel=model; 
-	 
-		model.updateView();
-		view.setButtonInvisible();
-		
-		  GameButtonListener gamebuttonlistener = new GameButtonListener(view,model);
+    this.game=game; 
+	 		
+			
+		  GameButtonListener gamebuttonlistener = new GameButtonListener(view,game);
 		  this.gamebuttonlistner = gamebuttonlistener; 
 		
 		 for (int j = 0; j< view.getGameButtons().length; j++) {
@@ -111,44 +85,36 @@ private Controller(TicTacToeModel model){
 public static class GameButtonListener implements ActionListener {
 
 	    View view;
-	    SlidePuzzleModel model1;
-	    TicTacToeModel model2; 
-	    int index; 
+	    Game game; 
 	
-public GameButtonListener(View view , SlidePuzzleModel model) {
+public GameButtonListener(View view ,Game game) {
 	
-	this.model1=model; 
+	this.game=game; 
 	this.view=view; 
-	index=1; 
-}	
-public GameButtonListener(View view , TicTacToeModel model) {
 	
-	this.model2=model; 
-	this.view=view; 
-	index=2; 
-}	
+}
 public void actionPerformed(ActionEvent e) {
 	   	
 	    	
-	  for (int j = 0; j< view.getGameButtons().length; j++) {
+	  for (int i = 0; i< view.getGameButtons().length; i++) {
 	        	
-	         for(int i=0; i< view.getGameButtons().length;i++){
+	         for(int j=0; j< view.getGameButtons().length;j++){
 	        		
-	        	 if (index==1 && e.getSource() == view.getGameButtons()[i][j]){
-	                 model1.move(i,j); 
-	        		 model1.getMessage();
-	        		 model1.updateView(model1.getStatus(i,j)); 
-	        		 }
-	        	 if (index==2 && e.getSource() == view.getGameButtons()[i][j]){
-	        	
-	                 model2.move(i,j); 
-	        		 model2.getMessage();
-	        		 model2.updateView(model2.getStatus(i,j)); 
-	        		 }
+	        	 if (e.getSource() == view.getGameButtons()[i][j]){
+	                 game.move(i,j); 
+	        		 game.getMessage();
 	        		 
-	        	 }
+	        	 for(int k=0; k< view.getGameButtons().length;k++)
+	        	 {  
+	        		for(int l=0; l<view.getGameButtons().length;l++){
+	        	     view.getGameButtons()[k][l].setText(game.getStatus(k,l));
+	        		 }
+	        	  }
+	        	}
 	 	  	
-	           }
+	          }
 	        }
-        }
+	view.setButtonInvisible();
+}
+}
 }; 

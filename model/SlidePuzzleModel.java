@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import controller.Controller;
+import controller.Update;
 import view.View;
 
 public class SlidePuzzleModel implements Game
@@ -10,16 +12,23 @@ public class SlidePuzzleModel implements Game
 	private ArrayList<String> numberList = new ArrayList<String>();
 	private String[][] board = new String[4][4]; 
 	View view; 
+	private static SlidePuzzleModel firstInstance = null; 
 
-	public SlidePuzzleModel(View view)
-	{
-		this.view=view; 
+	private SlidePuzzleModel()
+	{ 
 		createNumberList();
 		shuffleNumberList();
 		createGameBoard(numberList);
 		currentBoard(); 
 	}
 	
+	public static SlidePuzzleModel getInstance(){
+		if(firstInstance ==null){
+			
+			firstInstance = new SlidePuzzleModel(); 
+		}
+		return firstInstance; 
+	}
 	
 
 	public void createNumberList()
@@ -111,7 +120,7 @@ public class SlidePuzzleModel implements Game
 	}
 	
 	
-	public void updateView(String number){
+public void updateView(String number){
 		
 		int x=getPositionZero()/10;
 		int y=getPositionZero()%10; 
@@ -122,7 +131,7 @@ public class SlidePuzzleModel implements Game
 		
 	}
 
-	public  void updateView(){
+public  void updateView(){
 		
 		for(int i=0; i<board.length;i++)
 		{
@@ -150,11 +159,16 @@ public class SlidePuzzleModel implements Game
 	}
 	
 	
-
 	@Override
-	public String getStatus(int i, int j) {
-	   return board[i][j];	
+	public String getStatus(int i, int j) 
+	{
+			return board[i][j];
 	}
+	
+
+	
+	   
+	
 
 	@Override
 	public String getMessage() {

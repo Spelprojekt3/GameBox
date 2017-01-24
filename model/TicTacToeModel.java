@@ -24,11 +24,11 @@ public ArrayList<Integer> getScore() {
 	}
 
 
-public TicTacToeModel(View view){
+public TicTacToeModel(){
 	
-	this.view = view;
 	newBoard(); 
 	currentBoard(); 
+	//updateView(); 
 		
 }
 
@@ -45,6 +45,7 @@ public void newBoard(){
 	player="X";
 	}
 };
+
 
 public String currentBoard(){
 	
@@ -253,7 +254,7 @@ public void scoreBoard(String name){
 		
 		
 };
-
+/*
 public void updateView(String number){
 	
 	int x=getPositionZero()/10;
@@ -275,7 +276,7 @@ public  void updateView(){
 	}
 }
 }	
-
+*/
 public void emptyModel(){
 	
 	newBoard(); 
