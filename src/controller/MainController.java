@@ -31,7 +31,6 @@ private MainController(){
 	
 	MainView mainview= new MainView(); 
 	GameBox box = new GameBox(); 
-	
 	TicTacToe tGame= new TicTacToe(); 
 	SlidePuzzle sGame =new SlidePuzzle(); 
   
@@ -56,7 +55,7 @@ public static MainController getInstance(){
 	return firstInstance; 
 }
 
-public static void main(String[] arg){
+public static void main(String[] arg) throws GameException{
         try {
             // select Look and Feel
             UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
@@ -92,11 +91,21 @@ public void actionPerformed(ActionEvent e) {
 	        
 	        	
 	                if(e.getSource()==view.mainButtons[0]) {
-	                	state1.run();
+	                	try {
+							state1.run();
+						} catch (GameException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 	               
 	                    }
 	               if (e.getSource()==view.mainButtons[1]) {
-		                state2.run();
+		                try {
+							state2.run();
+						} catch (GameException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 	                    }
 	                	
 	                	

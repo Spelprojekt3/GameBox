@@ -1,6 +1,7 @@
 package gamebox;
 
 import controller.*;
+import exception.GameException;
 import model.SlidePuzzleModel;
 import model.TicTacToeModel;
 import view.View;
@@ -16,7 +17,7 @@ public SlidePuzzle(){
 }
 
 	@Override
-	public void run() {
+	public void run() throws GameException {
 		System.out.println("SlidePuzzle is running");
 		Controller controller = Controller.getInstance(index);	
 	}

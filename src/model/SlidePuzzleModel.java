@@ -149,8 +149,8 @@ public  void updateView(){
 }	
 	
 	
-	@Override
-	public boolean move(int i, int j) {
+@Override
+public boolean move(int i, int j) {
 		
 		int x=getPositionZero()/10; 
 		int y=getPositionZero()%10; 
@@ -165,19 +165,19 @@ public  void updateView(){
 	}
 	
 	
-	@Override
-	public String getStatus(int i, int j) 
-	{
+@Override
+public String getStatus(int i, int j) 
+{
 			return board[i][j];
-	}
+}
 	
 
 	
 	   
 	
 
-	@Override
-	public String getMessage() {
+@Override
+public String getMessage() {
 		// TODO Auto-generated method stub
 		return null;
 	}
