@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 
 import controller.Update;
+import exception.GameException;
 import view.View;
 
 
@@ -24,15 +25,14 @@ public ArrayList<Integer> getScore() {
 		return score;
 	}
 
-
-private TicTacToeModel(){
+private TicTacToeModel() throws GameException{
 	
 	newBoard(); 
 	currentBoard();  
 		
 }
 
-public static TicTacToeModel getInstance(){
+public static TicTacToeModel getInstance()throws GameException{
 	
 	if(firstInstance ==null){
 		
@@ -46,9 +46,13 @@ public static void reset(){
 	firstInstance=null; 
 }
 
-public void newBoard(){
+public void newBoard()throws GameException{
 	
 	int x= 4;
+	
+	if(x>10){
+		throw new GameException("Storleken är större än 10"); 
+	}
   
 	for(int s=0; s<x; s++){
 		
@@ -98,7 +102,7 @@ public void printCol(){
 };
 
 
-public char checkwin(){
+public char checkwin(String board[][]){
 	int n=4,counter=0;  
 	char winner; 
 	
@@ -203,20 +207,21 @@ board[x][y]=player;
 }
 
 public void winnerIs(){
-	
-	if (checkwin()=='X')
+
+	if (checkwin(board)=='X')
 	{
 		System.out.println("X"+" wins!"+"\n");
 		scoreBoard("X"); 
 		
 	} 
-	else if (checkwin()=='O')
+	else if (checkwin(board)=='O')
 	{	
 		System.out.println("O"+" wins!"+"\n"); 
 		scoreBoard("O");
 		
 	} 
-	else if (checkwin()=='D')
+
+	else if (checkwin(board)=='D')
 	{
 	    System.out.println("It's a tie!"+"\n");
 	    scoreBoard("T"); 
@@ -268,8 +273,8 @@ public void scoreBoard(String name){
 		
 };
 
-public void emptyModel(){
-	
+public void emptyModel() throws GameException{
+
 	newBoard(); 
 	currentBoard(); 
 }
@@ -331,7 +336,8 @@ public boolean move(int i, int j) {
 	addCoordinatate(i,j);
 	currentBoard(); 
     nextPlayer();
-    if(checkwin()=='X'||checkwin()=='O'||checkwin()=='D')
+  
+    if(checkwin(board)=='X'||checkwin(board)=='O'||checkwin(board)=='D')
     {
   	winnerIs();
     }

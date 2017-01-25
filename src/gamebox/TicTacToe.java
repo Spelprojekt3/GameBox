@@ -1,6 +1,6 @@
 package gamebox;
 import controller.*;
-
+import exception.GameException;
 import model.TicTacToeModel;
 import view.View;
 
@@ -15,7 +15,7 @@ public TicTacToe(){
 }
 
 	@Override
-	public void run() {
+	public void run() throws GameException {
 	System.out.println("TicTacToe is running");
 	Controller controller =Controller.getInstance(index);
 	}

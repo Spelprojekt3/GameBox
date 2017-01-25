@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
+
+import exception.GameException;
 import gamebox.GameBox;
 import gamebox.GameState;
 import gamebox.SlidePuzzle;
@@ -26,8 +28,8 @@ public class Controller
 	private static Controller firstInstance = null; 
 
 	
-public static Controller getInstance(int i){
-	
+
+public static Controller getInstance(int i) throws GameException{
 
 	if(firstInstance ==null){
 		
@@ -47,9 +49,9 @@ public void updateView(View view){
 			
 }
 
-private Controller(int gameNumber){
-	
-	
+
+private Controller(int gameNumber)throws GameException{
+
 	View view= View.getInstance();
 	box =new GameBox();
 	
@@ -127,4 +129,5 @@ public void actionPerformed(ActionEvent e) {
 	view.setButtonInvisible();
 }
 }
+
 }
