@@ -46,7 +46,7 @@ public static void reset(){
 	firstInstance=null; 
 }
 
-public void newBoard()throws GameException{
+private void newBoard()throws GameException{
 	
 	int x= 4;
 	
@@ -94,7 +94,7 @@ public String currentBoard(){
      return "currentBoard"; 
 };
 
-public void printCol(){
+private void printCol(){
 	
 	for(int r=0;r<3;r++){
 		System.out.print(" "+r+"  ");
@@ -105,10 +105,7 @@ public void printCol(){
 public char checkwin(String board[][]){
 	int n=4,counter=0;  
 	char winner; 
-	
-	
-    
-	
+		
 	//check horizontal coordinates  
       counter=1; 
       for(int i = 0; i<n; i++){
@@ -335,8 +332,15 @@ public boolean move(int i, int j) {
 	
 	addCoordinatate(i,j);
 	currentBoard(); 
-    nextPlayer();
-  
+    //nextPlayer();
+    if(checkwin(board)=='X'||checkwin(board)=='O'||checkwin(board)=='D')
+    {
+  	winnerIs();
+    }
+    
+	AI ai= new AI(); 
+	
+    currentBoard();
     if(checkwin(board)=='X'||checkwin(board)=='O'||checkwin(board)=='D')
     {
   	winnerIs();

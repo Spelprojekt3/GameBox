@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import exception.GameException;
 import model.TicTacToeModel;
+
 public class TicTacToeModelTest{
 
 TicTacToeModel model;
@@ -46,12 +47,12 @@ String[][] board2={{"O","","",""},
 
 Assert.assertEquals('O', model.checkwin(board2));
 
-String[][]board3={{"O","X","X","X"},
-                  {"O","X","X","O"},
-                  {"O","O","X","O"}, 
-                  {"O","O","X","X"}}; 
+String[][]board3={{"X","O","O","O"},
+                  {"X","X","X","O"},
+                  {"X","O","X","O"}, 
+                  {"X","O","X","X"}}; 
 
-Assert.assertEquals('D', model.checkwin(board3));
+Assert.assertEquals('X',model.checkwin(board3));
 
 
 }
