@@ -25,7 +25,6 @@ public ArrayList<Integer> getScore() {
 		return score;
 	}
 
-
 private TicTacToeModel() throws GameException{
 	
 	newBoard(); 
@@ -52,7 +51,7 @@ public void newBoard()throws GameException{
 	int x= 4;
 	
 	if(x>10){
-		throw new GameException("Storleken är större än 10"); 
+		throw new GameException("Storleken Ã¤r stÃ¶rre Ã¤n 10"); 
 	}
   
 	for(int s=0; s<x; s++){
@@ -208,7 +207,7 @@ board[x][y]=player;
 }
 
 public void winnerIs(){
-	
+
 	if (checkwin(board)=='X')
 	{
 		System.out.println("X"+" wins!"+"\n");
@@ -221,6 +220,7 @@ public void winnerIs(){
 		scoreBoard("O");
 		
 	} 
+
 	else if (checkwin(board)=='D')
 	{
 	    System.out.println("It's a tie!"+"\n");
@@ -274,7 +274,7 @@ public void scoreBoard(String name){
 };
 
 public void emptyModel() throws GameException{
-	
+
 	newBoard(); 
 	currentBoard(); 
 }
@@ -336,6 +336,7 @@ public boolean move(int i, int j) {
 	addCoordinatate(i,j);
 	currentBoard(); 
     nextPlayer();
+  
     if(checkwin(board)=='X'||checkwin(board)=='O'||checkwin(board)=='D')
     {
   	winnerIs();

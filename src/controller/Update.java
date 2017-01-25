@@ -11,6 +11,7 @@ static SlidePuzzleModel modelS;
 static TicTacToeModel modelT;
 static View view; 
 	
+
 public static void empty() throws GameException{
 	
 	TicTacToeModel model =TicTacToeModel.getInstance();

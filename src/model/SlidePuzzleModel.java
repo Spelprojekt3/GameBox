@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 import controller.Controller;
@@ -10,7 +11,8 @@ import view.View;
 public class SlidePuzzleModel implements Game
 {
 	private ArrayList<String> numberList = new ArrayList<String>();
-	private String[][] board = new String[4][4]; 
+	private String[][] board = new String[4][4];
+	private String[][] sortedBoard = new String[4][4];
 	View view; 
 	private static SlidePuzzleModel firstInstance = null; 
 
@@ -19,7 +21,8 @@ public class SlidePuzzleModel implements Game
 		createNumberList();
 		shuffleNumberList();
 		createGameBoard(numberList);
-		currentBoard(); 
+		currentBoard();
+		createSortedBoard();
 	}
 	
 	public static SlidePuzzleModel getInstance(){
@@ -29,8 +32,6 @@ public class SlidePuzzleModel implements Game
 		}
 		return firstInstance; 
 	}
-	
-
 
 	public static void reset(){
 		
@@ -64,6 +65,29 @@ public class SlidePuzzleModel implements Game
 
 	}
 
+	private void createSortedBoard()
+	{
+		int k = 1;
+		for (int i = 0; i < 4; i++)
+			for (int j = 0; j < 4; j++)
+			{
+				sortedBoard[i][j] = Integer.toString(k);
+				k++;
+			}
+		sortedBoard[3][3] = Integer.toString(0);
+	}
+
+	private boolean isPuzzleSolved()
+	{
+		return (Arrays.deepEquals(board, sortedBoard));
+	}
+
+	private boolean doWinnerCheck()
+	{
+		return(board[0][0].equals(sortedBoard[0][0]) && board[3][2].equals(sortedBoard[3][2]) &&
+				board[3][3].equals(sortedBoard[3][3]));
+	}
+
 	public void currentBoard()
 	{
 		for (int i = 0; i < 4; i++)
@@ -94,15 +118,11 @@ public class SlidePuzzleModel implements Game
 		}
 		return 0;	
 	}
-	
-	
 
 	public String[][] getBoard() {
 		
 		return board;
 	}
-	
-	
 
 	public void setBoard(String[][] board) {
 		this.board = board;
@@ -147,8 +167,7 @@ public  void updateView(){
 		}
 	}
 }	
-	
-	
+
 @Override
 public boolean move(int i, int j) {
 		
@@ -159,22 +178,22 @@ public boolean move(int i, int j) {
 		{
 		swap(x, y, i, j);
 		currentBoard();
+			if(doWinnerCheck() == true)
+			{
+				isPuzzleSolved(); //Show popup, show elapsed time(?).
+			}
+
 		return true; 
 		}
 		return false;
 	}
-	
-	
+
 @Override
 public String getStatus(int i, int j) 
 {
 			return board[i][j];
 }
-	
 
-	
-	   
-	
 
 @Override
 public String getMessage() {
