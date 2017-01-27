@@ -1,6 +1,7 @@
 package view; 
 
 import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -13,6 +14,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRootPane;
+import javax.swing.text.html.Option;
+
+
 
 
 public class View {
@@ -22,26 +26,21 @@ private JButton[][] gameButtons;
 public JButton[] mainButtons; 
 private static View firstInstance = null; 
 private JButton exitButton; 
+private Options option =new Options(); 
 private static JFrame mainframe; 
-
+private int size;
 	
-private View(){
+public View(int size){
+	
+	this.size=size;
 	
 	createWindow();
-	createGameButtons(4,4); 
+	createGameButtons(size,size); 
 	createExitButton(); 
 	mainframe.setVisible(true);
 	removeRootPane();
 }
 
-public static View getInstance(){
-	
-	if(firstInstance ==null){
-		
-		firstInstance = new View(); 
-	}
-	return firstInstance; 
-}
 
 public static void closeWindow(){
 	
@@ -55,6 +54,7 @@ public static void setInstance(){
 	
 }
 public void createWindow() {
+	
 	
 	mainframe= new JFrame(); 
 	mainframe.setPreferredSize(new Dimension(600,800));
@@ -74,7 +74,7 @@ public void createWindow() {
     //topPanel.setBackground(new Color(0,0,0));
 	
 	centerPanel= new JPanel(); 
-    centerPanel.setLayout(new GridLayout(4,4));
+    centerPanel.setLayout(new GridLayout(size,size));
 	centerPanel.setBackground(new Color(46,46,46));
 	mainframe.add(centerPanel,BorderLayout.CENTER);
 	

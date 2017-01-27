@@ -2,8 +2,11 @@ package model;
 
 import java.util.ArrayList;
 
+
 import controller.Update;
 import exception.GameException;
+import model.Enum.Player;
+import view.Options;
 import view.View;
 
 
@@ -13,13 +16,13 @@ public class TicTacToeModel implements Game{
 	private String player1,player2;
 	private int size;  
 	private String player;
-	private String[][] board = new String [4][4];
 	private static int score1,score2,dscore1,dscore2,lscore1,lscore2; 
 	private ArrayList<Integer>score=new ArrayList<Integer>(); 
 	private ArrayList<Integer>dscore=new ArrayList<Integer>();
 	private View view; 
 	private  static TicTacToeModel firstInstance=null; 
-	
+	private Options option = new Options(); 
+	private String[][] board = new String [option.getSize()][option.getSize()];
 	
 public ArrayList<Integer> getScore() {
 		return score;
@@ -48,7 +51,7 @@ public static void reset(){
 
 private void newBoard()throws GameException{
 	
-	int x= 4;
+	int x= option.getSize();
 	
 	if(x>10){
 		throw new GameException("Storleken är större än 10"); 
@@ -66,7 +69,7 @@ private void newBoard()throws GameException{
 
 public String currentBoard(){
 	
-	 int x=4; 
+	 int x=option.getSize(); 
 	 
 	 System.out.print("\n");
 	 printCol(); 	
@@ -103,7 +106,7 @@ private void printCol(){
 
 
 public char checkwin(String board[][]){
-	int n=4,counter=0;  
+	int n=option.getSize(),counter=0;  
 	char winner; 
 		
 	//check horizontal coordinates  
@@ -116,7 +119,7 @@ public char checkwin(String board[][]){
             	return winner='X';
             	} if(board[i][j]=="O"&& board[i][j+1]=="O"){
                   counter = counter+1;
-                  } if(counter == n){
+                  } if(counter == 3){
                   return winner='O';
                   }
               }
@@ -130,11 +133,11 @@ public char checkwin(String board[][]){
           for(int j=0;j<n-1;j++){
               if(board[j][i]=="X"&& board[j+1][i]=="X"){
                   counter = counter+1;
-                 } if(counter == n){
+                 } if(counter == 3){
             	 return winner='X';
             	 } if(board[j][i]=="O"&& board[j+1][i]=="O"){
                   counter = counter+1;
-                 } if(counter == n){
+                 } if(counter == 3){
             	 return winner='O';
             	 }
               }
@@ -147,11 +150,11 @@ public char checkwin(String board[][]){
       for(int i=0;i<n-1;i++){
              if(board[i][i]=="X" && board[i+1][i+1]=="X"){
              counter = counter+1;
-             } if (counter==n){
+             } if (counter==3){
              return winner='X';
              } if(board[i][i]=="O"&& board[i+1][i+1]=="O"){
              counter = counter+1;
-             } if (counter==n){
+             } if (counter==3){
              return winner='O'; 
              }
       }
@@ -162,11 +165,11 @@ public char checkwin(String board[][]){
       for(int i=0;i<n-1;i++){
           if(board[i][n-1-i]=="X" && board[i+1][n-1-(i+1)]=="X"){
               counter = counter+1;
-              } if (counter==n){
+              } if (counter==3){
               return winner='X';
               } if(board[i][n-1-i]=="O" && board[i+1][n-1-(i+1)]=="O"){
               counter = counter+1;
-              } if (counter==n){
+              } if (counter==3){
         	  return winner='O';
         	  }
           }
@@ -196,7 +199,7 @@ public void addCoordinatate(int x,int y )
 if(board[x][y]!=" ")
 {
 	System.out.println("Error, position is already taken");
-	nextPlayer(); 
+	
 }
 else if(board[x][y]==" ")
 board[x][y]=player;
@@ -282,12 +285,25 @@ public String getPlayer() {
 }
 
 public String nextPlayer(){
+	
 	if (player=="X"){
-       return player="O";
-       } else{
-	   return player="X";
-	   }
+	       return player="O";
+	       } else{
+		   return player="X";
+		   }
 };
+
+
+public void opponentMove(){
+	
+	if (Options.getOpponent().equals(Player.AI)){
+		AImove ai =new AImove(); 
+	}
+	if (Options.getOpponent().equals(Player.HUMAN)){
+		nextPlayer(); 
+	}
+	
+}
 
 public void setPlayer(String player) {
 	this.player = player;
@@ -307,39 +323,23 @@ public ArrayList<Integer> getDscore() {
 }
 
 
+
 public void setDscore(ArrayList<Integer> dscore) {
 	this.dscore = dscore;
 }
 
-public int getPositionZero()
-{
-	
-	for (int i = 0; i < 4; i++)
-	{
-		for(int j = 0; j < 4; j++)
-		{
-			if(board[i][j].equals("0")){
-				return  (i*10)+j ; 
-			}
-			
-		}
-	}
-	return 0;	
-}
+
 
 @Override
 public boolean move(int i, int j) {
 	
 	addCoordinatate(i,j);
-	currentBoard(); 
-    //nextPlayer();
+	currentBoard();
     if(checkwin(board)=='X'||checkwin(board)=='O'||checkwin(board)=='D')
     {
   	winnerIs();
     }
-    
-	AI ai= new AI(); 
-	
+	opponentMove(); 
     currentBoard();
     if(checkwin(board)=='X'||checkwin(board)=='O'||checkwin(board)=='D')
     {

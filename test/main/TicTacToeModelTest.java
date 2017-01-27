@@ -40,10 +40,10 @@ String[][] board={{"X","","",""},
 		
 Assert.assertEquals('X', model.checkwin(board));
 
-String[][] board2={{"O","","",""},
-                   {"O","X","",""},
-                   {"O","","X",""}, 
-                   {"O","","","X"}}; 
+String[][] board2={{"","","",""},
+                   {"X","","",""},
+                   {"","","",""}, 
+                   {"","","",""}}; 
 
 Assert.assertEquals('O', model.checkwin(board2));
 

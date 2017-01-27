@@ -11,9 +11,11 @@ import gamebox.GameBox;
 import gamebox.GameState;
 import gamebox.SlidePuzzle;
 import gamebox.TicTacToe;
+import model.Enum.Player.Board;
 import model.Game;
 import model.SlidePuzzleModel;
 import model.TicTacToeModel;
+import view.Options;
 import view.View;
 
 
@@ -25,6 +27,7 @@ public class Controller
 	Game game; 
 	GameState state;
 	GameBox box; 
+	Options option; 
 	private static Controller firstInstance = null; 
 
 	
@@ -52,32 +55,44 @@ public void updateView(View view){
 
 private Controller(int gameNumber)throws GameException{
 
-	View view= View.getInstance();
+	
 	box =new GameBox();
+	option =new Options(); 
 	
 	if(gameNumber==1){
+	option.askBordSize();
+	View view= new View(Options.getSize());
 	game = TicTacToeModel.getInstance();
-	state=new TicTacToe(); 
+	state=new TicTacToe();
+	Options.askForOpponent(); 
 	box.setGameState(state);
-	}
-	if(gameNumber==2){
-	game = SlidePuzzleModel.getInstance();
-	state=new SlidePuzzle(); 
 	
-	updateView(view);
-	view.setButtonInvisible();
-	}	
 	this.view=view; 
     this.game=game; 
+
+	}
+	if(gameNumber==2){
+	View view= new View(Board.SIZE);
+	game = SlidePuzzleModel.getInstance();
+	state=new SlidePuzzle(); 
+	box.setGameState(state);
+	updateView(view);
+	view.setButtonInvisible();
+	
+	this.view=view; 
+    this.game=game; 
+
+	}	
+
 	 		
 			
 		  GameButtonListener gamebuttonlistener = new GameButtonListener(view,game);
 		  this.gamebuttonlistner = gamebuttonlistener; 
 		
-		 for (int j = 0; j< view.getGameButtons().length; j++) {
+		 for (int i = 0; i< view.getGameButtons().length; i++) {
 			
 		
-		 for (int i = 0; i < view.getGameButtons().length; i++) {
+		 for (int j= 0; j< view.getGameButtons().length; j++) {
 	         view.getGameButtons()[i][j].addActionListener(gamebuttonlistner);
 	        }
 	      }
