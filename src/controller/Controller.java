@@ -5,30 +5,34 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
+
 import exception.GameException;
 import gamebox.GameBox;
 import gamebox.GameState;
 import gamebox.SlidePuzzle;
 import gamebox.TicTacToe;
+import model.Enum.Player.Board;
 import model.Game;
 import model.SlidePuzzleModel;
 import model.TicTacToeModel;
+import view.Options;
 import view.View;
 
 
 public class Controller
 {
 	GameButtonListener gamebuttonlistner; 
-    SlidePuzzleModel model;  
+	TicTacToeModel model; 
 	View view; 	 
 	Game game; 
 	GameState state;
 	GameBox box; 
+	Options option; 
 	private static Controller firstInstance = null; 
 
 	
+
 public static Controller getInstance(int i) throws GameException{
-	
 
 	if(firstInstance ==null){
 		
@@ -48,35 +52,57 @@ public void updateView(View view){
 			
 }
 
+
+
+public static void endGameIfWin(Game game, View view) throws GameException{
+	
+ String winner="W"; 
+	if(game.getMessage()==winner){
+		view.disableButtons(); 
+	}
+	
+}
+
 private Controller(int gameNumber)throws GameException{
+
 	
-	
-	View view= View.getInstance();
 	box =new GameBox();
+	option =new Options(); 
 	
 	if(gameNumber==1){
+	option.askBoardSize();
+	View view= new View(Options.getSize());
 	game = TicTacToeModel.getInstance();
-	state=new TicTacToe(); 
+	state=new TicTacToe();
+	Options.askForOpponent(); 
 	box.setGameState(state);
-	}
-	if(gameNumber==2){
-	game = SlidePuzzleModel.getInstance();
-	state=new SlidePuzzle(); 
 	
-	updateView(view);
-	view.setButtonInvisible();
-	}	
 	this.view=view; 
     this.game=game; 
+
+	}
+	if(gameNumber==2){
+	View view= new View(Board.SIZE);
+	game = SlidePuzzleModel.getInstance();
+	state=new SlidePuzzle(); 
+	box.setGameState(state);
+	updateView(view);
+	view.setButtonInvisible();
+	
+	this.view=view; 
+    this.game=game; 
+
+	}	
+
 	 		
 			
 		  GameButtonListener gamebuttonlistener = new GameButtonListener(view,game);
 		  this.gamebuttonlistner = gamebuttonlistener; 
 		
-		 for (int j = 0; j< view.getGameButtons().length; j++) {
+		 for (int i = 0; i< view.getGameButtons().length; i++) {
 			
 		
-		 for (int i = 0; i < view.getGameButtons().length; i++) {
+		 for (int j= 0; j< view.getGameButtons().length; j++) {
 	         view.getGameButtons()[i][j].addActionListener(gamebuttonlistner);
 	        }
 	      }
@@ -113,7 +139,13 @@ public void actionPerformed(ActionEvent e) {
 	        		
 	        	 if (e.getSource() == view.getGameButtons()[i][j]){
 	                 game.move(i,j);
-	        		 game.getMessage();
+	                 
+	        		 try {
+						Controller.endGameIfWin(game, view);
+					} catch (GameException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 	        		 
 	        	 for(int k=0; k< view.getGameButtons().length;k++)
 	        	 {  
@@ -125,7 +157,8 @@ public void actionPerformed(ActionEvent e) {
 	 	  	
 	          }
 	        }
-	view.setButtonInvisible();
+	view.setButtonInvisible(); 
 }
 }
-}; 
+
+}

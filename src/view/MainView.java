@@ -48,7 +48,7 @@ mainframe.getContentPane().setLayout(new BorderLayout());
 					    
 
 centerPanel= new JPanel(); 
-centerPanel.setLayout(new FlowLayout(FlowLayout.LEFT,28,200));
+centerPanel.setLayout(new FlowLayout(FlowLayout.LEFT,22,200));
 centerPanel.setOpaque(false);
 mainframe.add(centerPanel,BorderLayout.CENTER); 
 
@@ -66,6 +66,7 @@ public void addButtons(){
 	
 	for(int i = 0;i<mainButtons.length;i++){
 	 mainButtons[i] = new JButton();	
+	 mainButtons[i].setSize(197,200);
 	 setImage(mainButtons[i],"/images/button"+Integer.toString(i+1)+".png"); 
 	 mainButtons[i].setFocusable(false);
 	 centerPanel.add(mainButtons[i]);
