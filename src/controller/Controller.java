@@ -22,7 +22,6 @@ import view.View;
 public class Controller
 {
 	GameButtonListener gamebuttonlistner; 
-	TicTacToeModel model; 
 	View view; 	 
 	Game game; 
 	GameState state;
@@ -56,9 +55,17 @@ public void updateView(View view){
 
 public static void endGameIfWin(Game game, View view) throws GameException{
 	
- String winner="W"; 
-	if(game.getMessage()==winner){
+ String winnerT="W"; 
+ String winnerS="WS";
+ 
+	if(game.getMessage()==winnerT){
+		Options.showWinner(TicTacToeModel.getWinner());
 		view.disableButtons(); 
+	}
+	if(game.getMessage()==winnerS){
+		SlidePuzzleModel model= SlidePuzzleModel.getInstance();
+	    Options.showWinner(model.getWinner());
+	    view.disableButtons();
 	}
 	
 }
@@ -82,8 +89,8 @@ private Controller(int gameNumber)throws GameException{
 	
 	this.view=view; 
     this.game=game; 
-
 	}
+	
 	if(gameNumber==2){
 	View view= new View(Board.SIZE);
 	game = SlidePuzzleModel.getInstance();
@@ -94,11 +101,8 @@ private Controller(int gameNumber)throws GameException{
 	
 	this.view=view; 
     this.game=game; 
-
 	}	
-
-	 		
-			
+	
 		  GameButtonListener gamebuttonlistener = new GameButtonListener(view,game);
 		  this.gamebuttonlistner = gamebuttonlistener; 
 		
@@ -141,15 +145,7 @@ public void actionPerformed(ActionEvent e) {
 	         for(int j=0; j< view.getGameButtons().length;j++){
 	        		
 	        	 if (e.getSource() == view.getGameButtons()[i][j]){
-	                 game.move(i,j);
-	                 
-	        		 try {
-						Controller.endGameIfWin(game, view);
-					} catch (GameException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-	        		 
+	                 game.move(i,j); 
 	        	 for(int k=0; k< view.getGameButtons().length;k++)
 	        	 {  
 	        		for(int l=0; l<view.getGameButtons().length;l++){
@@ -161,6 +157,12 @@ public void actionPerformed(ActionEvent e) {
 	          }
 	        }
 	view.setButtonInvisible(); 
+	try {
+		Controller.endGameIfWin(game, view);
+	} catch (GameException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
 }
 }
 

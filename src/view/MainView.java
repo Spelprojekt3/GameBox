@@ -16,17 +16,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class MainView extends ViewComponents{
+public class MainView{
 	
-
 
 private JPanel centerPanel; 
 private JFrame mainframe; 
 private JLabel label;
 public JButton[] mainButtons; 
-
-
-
 
 
 public MainView(){
@@ -35,7 +31,6 @@ createMainWindow();
 addBackground();  
 addButtons(); 
 mainframe.setVisible(true);
-
 }
 
 
@@ -45,6 +40,7 @@ mainframe= new JFrame();
    
 mainframe.setPreferredSize(new Dimension(800,600));
 mainframe.getContentPane().setLayout(new BorderLayout());
+mainframe.setResizable(false);
 					    
 
 centerPanel= new JPanel(); 

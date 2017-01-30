@@ -59,6 +59,7 @@ public void createWindow() {
 	mainframe= new JFrame(); 
 	mainframe.setPreferredSize(new Dimension(600,800));
     mainframe.getContentPane().setLayout(new BorderLayout());
+ 
 
     
     topPanel= new JPanel(); 

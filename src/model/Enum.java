@@ -1,7 +1,7 @@
 package model;
 
 
-import view.Options;
+
 
 public enum  Enum{
 	
@@ -18,7 +18,7 @@ public class Board{
 	
 public static final int SIZE=4;
 
-}
+   }
 }
 
 

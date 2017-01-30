@@ -63,12 +63,33 @@ public void askBoardSize()
         JOptionPane.QUESTION_MESSAGE, 
         null, 
         sizeS,null);
+        if(choise ==null){
+        JOptionPane.getRootFrame().dispose();   
+        }
         size= Integer.parseInt(choise); 
         System.out.println("Size was: "+size);      
 }
 
-public void showWinner()
+public static void showWinner(String winner)
 {
+	String winnerO="Winner is player O",winnerX="Winner is player X",winnerD="It´s a tie!" 
+	,winnerS="Congratulations, you have solved the puzzle";
+	if(winner=="X")
+	{
+	JOptionPane.showMessageDialog(null, winnerX);
+	}
+	if(winner=="O")
+	{
+	JOptionPane.showMessageDialog(null, winnerO);	
+	}
+	if(winner=="D")
+	{
+	JOptionPane.showMessageDialog(null, winnerD);	
+	}
+	if(winner=="WS")
+	{
+	JOptionPane.showMessageDialog(null,winnerS);
+	}
 	
 }
 

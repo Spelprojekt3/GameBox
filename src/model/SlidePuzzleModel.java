@@ -13,7 +13,6 @@ public class SlidePuzzleModel implements Game
 	private ArrayList<String> numberList = new ArrayList<String>();
 	private String[][] board = new String[4][4];
 	private String[][] sortedBoard = new String[4][4];
-	View view; 
 	private static SlidePuzzleModel firstInstance = null; 
 
 	private SlidePuzzleModel()
@@ -38,7 +37,7 @@ public class SlidePuzzleModel implements Game
 		firstInstance=null; 
 	}
 
-	public void createNumberList()
+	private void createNumberList()
 	{
 		for (int i = 0; i < 16; i++) {
 		    String a =Integer.toString(i);
@@ -46,12 +45,12 @@ public class SlidePuzzleModel implements Game
 		}
 	}
 
-	public void shuffleNumberList()
+	private void shuffleNumberList()
 	{
 		Collections.shuffle(numberList);
 	}
 
-	public void createGameBoard(ArrayList<String> list)
+	private void createGameBoard(ArrayList<String> list)
 	{
 		int index = 0;
 		for (int i = 0; i < 4; i++)
@@ -77,7 +76,7 @@ public class SlidePuzzleModel implements Game
 		sortedBoard[3][3] = Integer.toString(0);
 	}
 
-	private boolean isPuzzleSolved()
+	private  boolean isPuzzleSolved()
 	{
 		return (Arrays.deepEquals(board, sortedBoard));
 	}
@@ -88,7 +87,7 @@ public class SlidePuzzleModel implements Game
 				board[3][3].equals(sortedBoard[3][3]));
 	}
 
-	public void currentBoard()
+	private void currentBoard()
 	{
 		for (int i = 0; i < 4; i++)
 		{
@@ -145,28 +144,16 @@ public class SlidePuzzleModel implements Game
 			
 	}
 	
+public String getWinner(){
 	
-public void updateView(String number){
-		
-		int x=getPositionZero()/10;
-		int y=getPositionZero()%10; 
-		
-		view.getGameButtons()[x][y].setText(number);
-		updateView(); 
-		view.setButtonInvisible(); 
-		
+	if(isPuzzleSolved()==true){
+		return "WS";
 	}
+	else
+	return " ";	
+}
 
-public  void updateView(){
-		
-		for(int i=0; i<board.length;i++)
-		{
-			
-			for(int j=0; j<board.length;j++){
-			view.getGameButtons()[i][j].setText(board[i][j]);	
-		}
-	}
-}	
+
 
 @Override
 public boolean move(int i, int j) {
@@ -197,8 +184,9 @@ public String getStatus(int i, int j)
 
 @Override
 public String getMessage() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	return getWinner(); 
+		
 	}
 }
 

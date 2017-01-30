@@ -3,6 +3,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 
+
 import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
@@ -26,10 +27,11 @@ public class MainController {
 	MainMenu main; 
 	private static MainController firstInstance=null;
 	static GameBox box;
-	
+    private MainView mainview;
+    
 private MainController(){
 	
-	MainView mainview= new MainView(); 
+    mainview= new MainView(); 
 	GameBox box = new GameBox(); 
 	TicTacToe tGame= new TicTacToe(); 
 	SlidePuzzle sGame =new SlidePuzzle(); 
@@ -64,8 +66,9 @@ public static void main(String[] arg) throws GameException{
             ex.printStackTrace();
 } 
           
-        GameState main= new MainMenu(); 
-        main.run();
+       
+        MainMenu state= new MainMenu();
+        state.run(); 
         
         
 	}
