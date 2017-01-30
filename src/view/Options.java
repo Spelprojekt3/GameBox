@@ -65,11 +65,13 @@ public void askBoardSize()
         null, 
         sizeS,null);
         size= Integer.parseInt(choise); 
-        System.out.println("Size was: "+size);
+        System.out.println("Size was: "+size);      
+}
 
-
-        
-  }
+public void showWinner()
+{
+	
+}
 
 
 

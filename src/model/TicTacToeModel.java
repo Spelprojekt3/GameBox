@@ -12,9 +12,6 @@ import view.View;
 
 public class TicTacToeModel implements Game{
 	
-	private static int click=0;
-	private String player1,player2;
-	private int size;  
 	private String player;
 	private static int score1,score2,dscore1,dscore2,lscore1,lscore2; 
 	private ArrayList<Integer>score=new ArrayList<Integer>(); 
@@ -109,9 +106,28 @@ final int maxx=Options.getSize();
 final int maxy=Options.getSize();
 
 public String checkwin(String board[][]){
-
-	char winner = 0; 
+    int counter =0; 
+	String winner = "0"; 
+	int n =Options.getSize();
 	    int[][] directions = {{1,0}, {1,-1}, {1,1}, {0,1}};
+	    
+	    counter=0; 
+        for(int i=0;i<n;i++){
+    		
+    		for(int j=0;j<n;j++){ 
+    			
+    			if(board[i][j]=="X"||board[i][j]=="O"){
+    			  counter=counter+1; 
+    			}
+    			if(board[i][j]==" "){
+    			  counter=counter+0; 
+    			}
+    			if(counter==(n*n)){
+    		      return winner="D"; 
+    			}
+    			}
+    		}
+	    
 	    for (int[] d : directions) {
 
 	    	int dx = d[0];
@@ -127,10 +143,13 @@ public String checkwin(String board[][]){
 	                                 && w == board[lastx][lasty]) {
 	                    	System.out.println("Winner");
 	                        return w;
+	                         
 	                    }
 	                }
 	            }
+	          
 	        }
+	        
 	    }
 	    return " "; 
 	}
