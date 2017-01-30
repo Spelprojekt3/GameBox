@@ -6,7 +6,11 @@ import model.Enum.Player;
 
 public class Options {
 
-static int size;
+
+public static final String[]sizeS= { "3", "4", "5", "6","7","8","9","10" };
+
+
+public static int size; 
 
 
 String message; 
@@ -43,41 +47,36 @@ public static String askForOpponent()
 	    }
 	    
 
-	    
- 
-public void askBordSize() {
-	        String message = "Write the size of the board";
-	        boolean keepGoing = true;
-	        while (keepGoing==true) {
-	            do {
-	                try {
-	                    String s = JOptionPane.showInputDialog(null, message,
-	                            "Write the size",
-	                            JOptionPane.OK_OPTION);
-	                    if (s == null) {
-	                        int confirmExit = JOptionPane.showConfirmDialog(null,
-	                                "Är du säker på att du vill avsluta?", null,
-	                                JOptionPane.YES_NO_OPTION);
-	                        if (confirmExit == JOptionPane.YES_OPTION) {
-	                            System.exit(0);
-	                        }
-	                    }
-	                    size= Integer.parseInt(s);
-	                } catch (NumberFormatException e) {
-	                	
-	                }
-	                message = "<html><b style='color:red'>Fel, ange storlek:</b><br>"
-	                        + "Ange 1-10";
-	                System.out.println("input was: " + size);
-	                keepGoing=false;
-	            } while (size>10 || size<3 && keepGoing);
-	            
-	        }         
-}
-public static int getSize(){
+	 
 
+public static int getSize(){
+	
 return size; 
 }
+  
+public void askBoardSize()
+{
+   
+    String choise= (String) JOptionPane.showInputDialog( 
+        null, "Choose a size",
+        "Boardsize",
+        JOptionPane.QUESTION_MESSAGE, 
+        null, 
+        sizeS,null);
+        size= Integer.parseInt(choise); 
+        System.out.println("Size was: "+size);      
+}
+
+public void showWinner()
+{
+	
+}
+
+
+
+
+
+
 
 };
 

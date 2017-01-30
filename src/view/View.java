@@ -38,7 +38,7 @@ public View(int size){
 	createGameButtons(size,size); 
 	createExitButton(); 
 	mainframe.setVisible(true);
-	removeRootPane();
+	removeRootPane(); 
 }
 
 
@@ -64,37 +64,38 @@ public void createWindow() {
     topPanel= new JPanel(); 
     JLabel label = new JLabel(); 
     label.setFont(new Font("TeXGyreAdventor", Font.PLAIN, 50));
-    label.setForeground(new Color(255,255,255));
+    label.setForeground(new Color(0,0,0));
     
     
 	topPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
     topPanel.setPreferredSize(new Dimension(200, 120));
-    topPanel.setBackground(new Color(46,46,46));
+    topPanel.setBackground(new Color(20,20,20));
     mainframe.add(topPanel,BorderLayout.NORTH); 
     //topPanel.setBackground(new Color(0,0,0));
 	
 	centerPanel= new JPanel(); 
-    centerPanel.setLayout(new GridLayout(size,size));
-	centerPanel.setBackground(new Color(46,46,46));
+  centerPanel.setLayout(new GridLayout(size,size));
+	centerPanel.setBackground(new Color(20,20,20));
+
 	mainframe.add(centerPanel,BorderLayout.CENTER);
 	
 	westPanel= new JPanel(); 
 	westPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
     westPanel.setPreferredSize(new Dimension(40, 0));
-    westPanel.setBackground(new Color(46,46,46));
+    westPanel.setBackground(new Color(20,20,20));
     mainframe.add(westPanel,BorderLayout.WEST); 
    
     eastPanel= new JPanel(); 
 	eastPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
     eastPanel.setPreferredSize(new Dimension(40,0));
-    eastPanel.setBackground(new Color(46,46,46));
+    eastPanel.setBackground(new Color(20,20,20));
     mainframe.add(eastPanel,BorderLayout.EAST); 
 	
 	
 	bottomPanel= new JPanel(); 
 	bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER,100,30));
     bottomPanel.setPreferredSize(new Dimension(0,150));
-    bottomPanel.setBackground(new Color(46,46,46));
+    bottomPanel.setBackground(new Color(20,20,20));
     mainframe.add(bottomPanel,BorderLayout.SOUTH); 
 	
 	
@@ -112,8 +113,8 @@ public void createGameButtons(int x, int y){
 	for(int j=0;j<getGameButtons().length;j++){
 		
 		 gameButtons[i][j] = new JButton();
-		 gameButtons[i][j].setBackground(new Color(255,255,255));
-		 gameButtons[i][j].setFont(new Font("Tahoma",Font.PLAIN,50));
+		 gameButtons[i][j].setBackground(new Color(200,200,200));
+		 gameButtons[i][j].setFont(new Font("",Font.PLAIN,40));
 		 gameButtons[i][j].setForeground(new Color(46,46,46));
          centerPanel.add(getGameButtons()[i][j]);     
 	}
@@ -128,6 +129,19 @@ public void createExitButton(){
 	
 }
 
+public void disableButtons(){
+	
+	for(int i=0;i<gameButtons.length;i++){
+		
+		for(int j=0;j<gameButtons.length;j++){
+			
+			gameButtons[i][j].setEnabled(false);
+			gameButtons[i][j].setForeground(Color.RED);
+				
+		}	   
+	}				
+	
+}
 
 	
 public void setButtonInvisible()

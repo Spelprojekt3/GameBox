@@ -12,9 +12,6 @@ import view.View;
 
 public class TicTacToeModel implements Game{
 	
-	private static int click=0;
-	private String player1,player2;
-	private int size;  
 	private String player;
 	private static int score1,score2,dscore1,dscore2,lscore1,lscore2; 
 	private ArrayList<Integer>score=new ArrayList<Integer>(); 
@@ -23,6 +20,8 @@ public class TicTacToeModel implements Game{
 	private  static TicTacToeModel firstInstance=null; 
 	private Options option = new Options(); 
 	private String[][] board = new String [option.getSize()][option.getSize()];
+	private String winner; 
+
 	
 public ArrayList<Integer> getScore() {
 		return score;
@@ -103,79 +102,19 @@ private void printCol(){
 		System.out.print(" "+r+"  ");
 		}System.out.println("\n");
 };
+  
+final int maxx=Options.getSize();
+final int maxy=Options.getSize();
 
+public String checkwin(String board[][]){
+  int counter =0; 
+	String winner = "0"; 
+	int n =Options.getSize();
+	    int[][] directions = {{1,0}, {1,-1}, {1,1}, {0,1}};
+	    
+	    counter=0; 
+        for(int i=0;i<n;i++){
 
-public char checkwin(String board[][]){
-	int n=option.getSize(),counter=0;  
-	char winner; 
-		
-	//check horizontal coordinates  
-      counter=1; 
-      for(int i = 0; i<n; i++){
-          for(int j=0;j<n-1;j++){
-              if(board[i][j]=="X"&& board[i][j+1]=="X"){
-                  counter = counter+1;
-              } if(counter == n){
-            	return winner='X';
-            	} if(board[i][j]=="O"&& board[i][j+1]=="O"){
-                  counter = counter+1;
-                  } if(counter == 3){
-                  return winner='O';
-                  }
-              }
-          counter = 1;
-          }
-      
-      
-      counter = 1;
-    // check vertical coordinates 
-      for(int i = 0; i<n; i++){
-          for(int j=0;j<n-1;j++){
-              if(board[j][i]=="X"&& board[j+1][i]=="X"){
-                  counter = counter+1;
-                 } if(counter == 3){
-            	 return winner='X';
-            	 } if(board[j][i]=="O"&& board[j+1][i]=="O"){
-                  counter = counter+1;
-                 } if(counter == 3){
-            	 return winner='O';
-            	 }
-              }
-          counter = 1;
-      }
-      
-      
-      counter = 1;
-      // check diagonal coordinates
-      for(int i=0;i<n-1;i++){
-             if(board[i][i]=="X" && board[i+1][i+1]=="X"){
-             counter = counter+1;
-             } if (counter==3){
-             return winner='X';
-             } if(board[i][i]=="O"&& board[i+1][i+1]=="O"){
-             counter = counter+1;
-             } if (counter==3){
-             return winner='O'; 
-             }
-      }
-      
-      
-      counter = 1;
-      // check anti-diagonal coordinates 
-      for(int i=0;i<n-1;i++){
-          if(board[i][n-1-i]=="X" && board[i+1][n-1-(i+1)]=="X"){
-              counter = counter+1;
-              } if (counter==3){
-              return winner='X';
-              } if(board[i][n-1-i]=="O" && board[i+1][n-1-(i+1)]=="O"){
-              counter = counter+1;
-              } if (counter==3){
-        	  return winner='O';
-        	  }
-          }
-     counter = 0;  
-    //check if all coordinates are filled
-    	for(int i=0;i<n;i++){
     		
     		for(int j=0;j<n;j++){ 
     			
@@ -186,46 +125,76 @@ public char checkwin(String board[][]){
     			  counter=counter+0; 
     			}
     			if(counter==(n*n)){
-    		      return winner='D'; 
+    		      return winner="D"; 
     			}
     			}
     		}
-    	
-      return winner=' '; 
-};
+	    
+	    for (int[] d : directions) {
 
-public void addCoordinatate(int x,int y )
+	    	int dx = d[0];
+	        int dy = d[1];
+	        for (int x = 0; x < maxx; x++) {
+	            for (int y = 0; y < maxy; y++) {
+	                int lastx = x + 2*dx;
+	                int lasty = y + 2*dy;
+	                if (0 <= lastx && lastx < maxx && 0 <= lasty && lasty < maxy) {
+	                    String w = board[x][y];
+	                    if (w != " " && w == board[x+dx][y+dy] 
+	                                 && w == board[x+2*dx][y+2*dy] 
+	                                 && w == board[lastx][lasty]) {
+	                    	System.out.println("Winner");
+	                        return w;
+	                         
+	                    }
+	                }
+	            }
+	          
+	        }
+	        
+	    }
+	    return " "; 
+	}
+	
+public boolean addCoordinatate(int x,int y )
 {
 if(board[x][y]!=" ")
 {
 	System.out.println("Error, position is already taken");
+	return false;
 	
 }
 else if(board[x][y]==" ")
 board[x][y]=player;
+return true; 
 
 }
 
-public void winnerIs(){
+public String winnerIs(){ 
 
-	if (checkwin(board)=='X')
+	if (checkwin(board)=="X")
 	{
 		System.out.println("X"+" wins!"+"\n");
 		scoreBoard("X"); 
+		winner="X"; 
 		
 	} 
-	else if (checkwin(board)=='O')
+	if (checkwin(board)=="O")
 	{	
 		System.out.println("O"+" wins!"+"\n"); 
 		scoreBoard("O");
+		winner="O";
 		
 	} 
 
-	else if (checkwin(board)=='D')
+	  if (checkwin(board)=="D")
+
 	{
 	    System.out.println("It's a tie!"+"\n");
 	    scoreBoard("T"); 
+	    winner="D";
 	}
+	return winner; 
 }
 
 public void scoreBoard(String name){
@@ -295,6 +264,7 @@ public String nextPlayer(){
 
 
 public void opponentMove(){
+
 	
 	if (Options.getOpponent().equals(Player.AI)){
 		AImove ai =new AImove(); 
@@ -333,18 +303,15 @@ public void setDscore(ArrayList<Integer> dscore) {
 @Override
 public boolean move(int i, int j) {
 	
-	addCoordinatate(i,j);
+
+	if(addCoordinatate(i,j)==true && checkwin(board)!="X"){
 	currentBoard();
-    if(checkwin(board)=='X'||checkwin(board)=='O'||checkwin(board)=='D')
-    {
-  	winnerIs();
-    }
 	opponentMove(); 
+	currentBoard();
+	}
+	else	
     currentBoard();
-    if(checkwin(board)=='X'||checkwin(board)=='O'||checkwin(board)=='D')
-    {
-  	winnerIs();
-    }
+
 	return true;
 	
 }
@@ -355,12 +322,18 @@ public String getStatus(int i, int j) {
 	
 	return board[i][j];
 }
-
-
 @Override
 public String getMessage() {
-	// TODO Auto-generated method stub
-	return null;
+
+
+	if(checkwin(board)=="X"||checkwin(board)=="D"||checkwin(board)=="O"){
+		winnerIs(); 
+		winner="W"; 
+	}
+	else 
+		winner="NW"; 
+  
+return winner; 
 }
 
 };

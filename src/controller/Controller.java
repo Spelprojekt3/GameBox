@@ -22,7 +22,7 @@ import view.View;
 public class Controller
 {
 	GameButtonListener gamebuttonlistner; 
-    SlidePuzzleModel model;  
+	TicTacToeModel model; 
 	View view; 	 
 	Game game; 
 	GameState state;
@@ -53,14 +53,27 @@ public void updateView(View view){
 }
 
 
+
+public static void endGameIfWin(Game game, View view) throws GameException{
+	
+ String winner="W"; 
+	if(game.getMessage()==winner){
+		view.disableButtons(); 
+	}
+	
+}
+
 private Controller(int gameNumber)throws GameException{
 
 	
+
 	box =new GameBox();
 	option =new Options(); 
 	
 	if(gameNumber==1){
-	option.askBordSize();
+
+	option.askBoardSize();
+
 	View view= new View(Options.getSize());
 	game = TicTacToeModel.getInstance();
 	state=new TicTacToe();
@@ -129,7 +142,13 @@ public void actionPerformed(ActionEvent e) {
 	        		
 	        	 if (e.getSource() == view.getGameButtons()[i][j]){
 	                 game.move(i,j);
-	        		 game.getMessage();
+	                 
+	        		 try {
+						Controller.endGameIfWin(game, view);
+					} catch (GameException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 	        		 
 	        	 for(int k=0; k< view.getGameButtons().length;k++)
 	        	 {  
@@ -141,8 +160,10 @@ public void actionPerformed(ActionEvent e) {
 	 	  	
 	          }
 	        }
-	view.setButtonInvisible();
+	view.setButtonInvisible(); 
 }
 }
 
 }
+
+
