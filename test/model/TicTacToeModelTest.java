@@ -42,9 +42,9 @@ class TicTacToeModelTest {
         */
 
         TicTacToeModel testModel = TicTacToeModel.getInstance();
-        Assertions.assertNotEquals(null, testModel.getFirstInstance());
+        Assertions.assertNotEquals(null, testModel.getInstance());
         testModel.reset();
-        Assertions.assertNull(testModel.getFirstInstance());
+        Assertions.assertNull(testModel.getInstance());
     }
 
     @Test
