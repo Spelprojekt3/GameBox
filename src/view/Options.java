@@ -6,6 +6,7 @@ import model.Enum.Player;
 
 public class Options {
 
+
 public static final String[]sizeS= { "3", "4", "5", "6","7","8","9","10" };
 
 
@@ -46,15 +47,13 @@ public static String askForOpponent()
 	    }
 	    
 
-	    
+	 
 
 public static int getSize(){
 	
-
 return size; 
 }
-
-
+  
 public void askBoardSize()
 {
    
@@ -72,6 +71,8 @@ public void showWinner()
 {
 	
 }
+
+
 
 
 

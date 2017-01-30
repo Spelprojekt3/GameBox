@@ -74,8 +74,9 @@ public void createWindow() {
     //topPanel.setBackground(new Color(0,0,0));
 	
 	centerPanel= new JPanel(); 
-    centerPanel.setLayout(new GridLayout(size,size));
+  centerPanel.setLayout(new GridLayout(size,size));
 	centerPanel.setBackground(new Color(20,20,20));
+
 	mainframe.add(centerPanel,BorderLayout.CENTER);
 	
 	westPanel= new JPanel(); 

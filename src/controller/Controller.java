@@ -66,11 +66,14 @@ public static void endGameIfWin(Game game, View view) throws GameException{
 private Controller(int gameNumber)throws GameException{
 
 	
+
 	box =new GameBox();
 	option =new Options(); 
 	
 	if(gameNumber==1){
+
 	option.askBoardSize();
+
 	View view= new View(Options.getSize());
 	game = TicTacToeModel.getInstance();
 	state=new TicTacToe();
@@ -162,3 +165,5 @@ public void actionPerformed(ActionEvent e) {
 }
 
 }
+
+

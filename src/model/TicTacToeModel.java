@@ -21,6 +21,7 @@ public class TicTacToeModel implements Game{
 	private Options option = new Options(); 
 	private String[][] board = new String [option.getSize()][option.getSize()];
 	private String winner; 
+
 	
 public ArrayList<Integer> getScore() {
 		return score;
@@ -101,18 +102,19 @@ private void printCol(){
 		System.out.print(" "+r+"  ");
 		}System.out.println("\n");
 };
-
+  
 final int maxx=Options.getSize();
 final int maxy=Options.getSize();
 
 public String checkwin(String board[][]){
-    int counter =0; 
+  int counter =0; 
 	String winner = "0"; 
 	int n =Options.getSize();
 	    int[][] directions = {{1,0}, {1,-1}, {1,1}, {0,1}};
 	    
 	    counter=0; 
         for(int i=0;i<n;i++){
+
     		
     		for(int j=0;j<n;j++){ 
     			
@@ -160,6 +162,7 @@ if(board[x][y]!=" ")
 {
 	System.out.println("Error, position is already taken");
 	return false;
+	
 }
 else if(board[x][y]==" ")
 board[x][y]=player;
@@ -185,6 +188,7 @@ public String winnerIs(){
 	} 
 
 	  if (checkwin(board)=="D")
+
 	{
 	    System.out.println("It's a tie!"+"\n");
 	    scoreBoard("T"); 
@@ -260,7 +264,7 @@ public String nextPlayer(){
 
 
 public void opponentMove(){
-		
+
 	
 	if (Options.getOpponent().equals(Player.AI)){
 		AImove ai =new AImove(); 
@@ -307,6 +311,7 @@ public boolean move(int i, int j) {
 	}
 	else	
     currentBoard();
+
 	return true;
 	
 }
@@ -317,8 +322,6 @@ public String getStatus(int i, int j) {
 	
 	return board[i][j];
 }
-
-
 @Override
 public String getMessage() {
 

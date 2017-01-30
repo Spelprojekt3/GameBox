@@ -5,10 +5,8 @@ import view.Options;
 
 public enum  Enum{
 	
-	AI,HUMAN,SIZE,SIZES; 
-	
 
-	
+	AI,HUMAN,SIZE,SIZES; 	
 
 public class Player{
 
