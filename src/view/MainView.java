@@ -1,20 +1,12 @@
 package view;
 
 import java.awt.BorderLayout;
-
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-
 import java.awt.Image;
 import java.io.IOException;
-
-
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class MainView{
 	
@@ -50,7 +42,7 @@ mainframe.add(centerPanel,BorderLayout.CENTER);
 
 mainframe.pack();  
 mainframe.setLocationRelativeTo(null);
-mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 				    
 }

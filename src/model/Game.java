@@ -2,11 +2,11 @@ package model;
 
 public interface Game {
 		 
-	public boolean move(int i, int j);
+	boolean move(int i, int j);
 		 
-	public String getStatus(int i, int j);
+	String getStatus(int i, int j);
 		 
-	public String getMessage();
+	String getMessage();
 	
 		
 }

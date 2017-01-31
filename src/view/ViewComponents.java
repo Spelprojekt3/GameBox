@@ -19,7 +19,7 @@ public abstract class ViewComponents {
 JLabel label; 
 	
 public void addBackground(JFrame frame ,JLabel label){
-; 
+;
 		try {
 		Image img = ImageIO.read(getClass().getResource("/images/menu.png"));
 		label= new JLabel(new ImageIcon(img));

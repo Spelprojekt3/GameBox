@@ -8,7 +8,6 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.WindowEvent;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -197,7 +196,7 @@ public void setExitButton(JButton exitButton) {
 	this.exitButton = exitButton;
 }
 	
-};
+}
 
 
 
