@@ -1,5 +1,9 @@
 package exception;
-
+/**
+ * Exception class
+ * @author Marcus
+ *
+ */
 public class GameException extends Exception{
 
 public GameException(){}
