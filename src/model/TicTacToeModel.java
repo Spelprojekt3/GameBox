@@ -162,7 +162,6 @@ public String checkwin(String board[][]){
 public static void setWinner(String string){
 	
 	victory=string; 
-	System.out.println(string);
 	
 }
 

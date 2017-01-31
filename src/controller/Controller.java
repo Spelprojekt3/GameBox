@@ -29,7 +29,14 @@ public class Controller
 	private static Controller firstInstance = null; 
 
 	
-
+/**
+ * gets the instance of the controller object 
+ * @param i index of game
+ * @return a new instance of controller or returns created instance
+ * @throws GameException
+ */
+	
+	
 public static Controller getInstance(int i) throws GameException{
 
 	if(firstInstance ==null){
@@ -38,6 +45,11 @@ public static Controller getInstance(int i) throws GameException{
 	}
 	return firstInstance; 
 }
+
+/**
+ * updates the view according to the initialized model
+ * @param object of the the class View
+ */
 
 private void updateView(View view){
 
@@ -49,7 +61,12 @@ private void updateView(View view){
 	  }
 			
 }
-
+/**
+ * Ends the game if someone wins 
+ * @param game is the game the user wants to play 
+ * @param view is the view that the game uses
+ * @throws GameException
+ */
 
 
 public static void endGameIfWin(Game game, View view) throws GameException{
@@ -68,7 +85,11 @@ public static void endGameIfWin(Game game, View view) throws GameException{
 	}
 	
 }
-
+/**
+ * Constructor of the Controller object 
+ * @param gameNumber is the index of the game 
+ * @throws GameException 
+ */
 private Controller(int gameNumber)throws GameException{
 
 	
@@ -124,7 +145,11 @@ private static class GameButtonListener implements ActionListener {
 
 	    View view;
 	    Game game; 
-	
+/**
+ * Listens to user input
+ * @param is the viewport of the game 
+ * @param game is the game that the user wants to play 
+ */
 public GameButtonListener(View view ,Game game) {
 	
 	this.game=game; 

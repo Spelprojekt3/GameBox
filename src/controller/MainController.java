@@ -4,6 +4,7 @@ package controller;
 import java.awt.event.ActionEvent;
 
 
+
 import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
@@ -27,7 +28,9 @@ public class MainController {
 	private static MainController firstInstance=null;
     private MainView mainview;
     private static GameBox box = new GameBox();
-    
+/**
+ * Constructor of the main 
+ */
 private MainController(){
 	
 	 
@@ -55,7 +58,11 @@ public static MainController getInstance(){
 	}
 	return firstInstance; 
 }
-
+/**
+ * Main method of the game 
+ * @param arg
+ * @throws GameException
+ */
 public static void main(String[] arg) throws GameException{
         try {
             // select Look and Feel

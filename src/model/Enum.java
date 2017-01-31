@@ -6,7 +6,9 @@ package model;
 public enum  Enum{
 	
 
-AI,HUMAN,SIZE,SIZES,TICTACTOE,SLIDEPUZZLE; 	
+AI,HUMAN,SIZE,SIZES,TICTACTOE,SLIDEPUZZLE; 
+	
+
 
 public class Player{
 

@@ -3,7 +3,11 @@ package view;
 import javax.swing.JOptionPane;
 
 import model.Enum.Player;
-
+/**
+ * Handles inputs from the user  
+ * @author Marcus, Christoffer 
+ *
+ */
 public class Options {
 
 
@@ -15,6 +19,10 @@ public static int size;
 
 String message; 
 private static String opponent;
+/**
+ * Asks if the opponent should bee a computer or a human player
+ * @return the  chosen opponent  
+ */
 
 public static String askForOpponent()
 {
@@ -48,12 +56,17 @@ public static String askForOpponent()
 	    
 
 	 
-
+/**
+ * Size of the TicTacToe board
+ * @return the size as an integer
+ */
 public static int getSize(){
 	
 return size; 
 }
-  
+ /**
+  * Asks the user to choose the size of the TicTacToe-board 
+  */
 public void askBoardSize()
 {
    

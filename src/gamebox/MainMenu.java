@@ -2,7 +2,11 @@ package gamebox;
 
 import controller.MainController;
 import view.MainView;
-
+/**
+ * State that represents the main menu
+ * @author Marcus
+ *
+ */
 
 public class MainMenu implements GameState {
 	
@@ -14,10 +18,16 @@ public class MainMenu implements GameState {
 	}
 
 	@Override
+	/**
+	 * runs the state "Main Menu"
+	 */
 	public  void run() {	
 		MainController main = MainController.getInstance(); 
 		System.out.println("MainMenu is running");
 	}
+	/**
+	 * exits the game 
+	 */
 	
 	@Override
 	public void exit() {
