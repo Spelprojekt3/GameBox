@@ -3,7 +3,6 @@ package model;
 import exception.GameException;
 import gamebox.TicTacToe;
 import org.junit.jupiter.api.*;
-import view.Options;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ class TicTacToeModelTest {
         TicTacToeModel testModel = TicTacToeModel.getInstance();
         ArrayList<Integer> testArray = new ArrayList<>();
 
-        Assertions.assertEquals(testArray, testModel.getScore());
+        Assertions.assertEquals(testArray,testModel.getScore());
         testModel.reset();
     }
 
@@ -43,16 +42,16 @@ class TicTacToeModelTest {
         */
 
         TicTacToeModel testModel = TicTacToeModel.getInstance();
-        Assertions.assertNotEquals(null, testModel.getFirstInstance());
+        Assertions.assertNotEquals(null, testModel.getInstance());
         testModel.reset();
-        Assertions.assertNull(testModel.getFirstInstance());
+        Assertions.assertNull(testModel.getInstance());
     }
 
     @Test
     void emptyModel() throws GameException {
         TicTacToeModel testModel = TicTacToeModel.getInstance();
 
-        testModel.move(2, 2);
+        testModel.move(2,2);
         testModel.emptyModel();
         //testModel.reset();
         String[][] testBoard = new String[4][4];
@@ -90,8 +89,6 @@ class TicTacToeModelTest {
     @Test
     void move() throws GameException {
         TicTacToeModel testModel = TicTacToeModel.getInstance();
-
-
         String[][] testBoard = new String[4][4];
         testModel.emptyModel();
         for (int i = 0; i < 4; i++) {
@@ -100,28 +97,26 @@ class TicTacToeModelTest {
             }
         }
         Assertions.assertEquals(Arrays.deepToString(testBoard), Arrays.deepToString(testModel.getBoard()));
-/*
-        testModel.move(1, 2);
-        String[][] board2 = {{" ", " ", " ", " "},
-                {" ", " ", "X", " "},
-                {" ", " ", " ", " "},
-                {" ", " ", " ", " "}};
+
+        testModel.move(1,2);
+        String[][] board2={{" "," "," "," "},
+                {" "," ","X"," "},
+                {" "," "," "," "},
+                {" "," "," "," "}};
         Assertions.assertEquals(Arrays.deepToString(board2), Arrays.deepToString(testModel.getBoard()));
         testModel.reset();
-        */
     }
 
     @Test
     void getStatus() throws GameException {
         TicTacToeModel testModel2 = TicTacToeModel.getInstance();
-
-        testModel2.move(1, 1);
-        Assertions.assertEquals("X", testModel2.getStatus(1, 1));
+        testModel2.move(1,1);
+        Assertions.assertEquals("X", testModel2.getStatus(1,1));
     }
 
     @Test
     void getMessage() {
-        //Not used
+    //Not used
     }
 
 }
