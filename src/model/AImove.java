@@ -33,7 +33,7 @@ public AImove(){
  * @param k is the number of available positions in the board 
  * @return the random number 
  */
-public int createRandom(int k){
+private int createRandom(int k){
 	
 	Random rand= new Random(); 
 	random=rand.nextInt(k)+0;
@@ -46,7 +46,7 @@ public int createRandom(int k){
  * @return the number of the available spots 
  */
 
-public int analyseBoard(){
+private int analyseBoard(){
 	
 	try {
 		model= TicTacToeModel.getInstance();
@@ -78,7 +78,7 @@ public int analyseBoard(){
  * @param nummer
  */
 
-public void makeMove(int nummer)
+private void makeMove(int nummer)
 {
 	int x=nummer/10;
 	int y=nummer%10; 

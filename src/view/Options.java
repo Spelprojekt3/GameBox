@@ -84,7 +84,7 @@ public void askBoardSize()
 
 public static void showWinner(String winner)
 {
-	String winnerO="Winner is player O",winnerX="Winner is player X",winnerD="ItÂ´s a tie!" 
+	String winnerO="Winner is player O",winnerX="Winner is player X",winnerD="It´s a tie!" 
 	,winnerS="Congratulations, you have solved the puzzle";
 	if(winner=="X")
 	{
