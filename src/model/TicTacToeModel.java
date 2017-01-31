@@ -1,11 +1,8 @@
 package model;
 
 import java.util.ArrayList;
-
-
-
 import exception.GameException;
-import model.Enum.Player;
+import model.Enum;
 import view.Options;
 import view.View;
 
@@ -51,10 +48,6 @@ public static void reset(){
 private void newBoard()throws GameException{
 	
 	int x= option.getSize();
-	
-	if(x>10){
-		throw new GameException("Storleken är större än 10"); 
-	}
   
 	for(int s=0; s<x; s++){
 		
@@ -66,7 +59,7 @@ private void newBoard()throws GameException{
 };
 
 
-public String currentBoard(){
+private String currentBoard(){
 	
 	 int x=option.getSize(); 
 	 
@@ -106,32 +99,11 @@ private void printCol(){
 final int maxx=Options.getSize();
 final int maxy=Options.getSize();
 
-public String checkwin(String board[][]){
+private String checkwin(String board[][]){
   int counter =0; 
 	String winner = "0"; 
 	int n =Options.getSize();
 	    int[][] directions = {{1,0}, {1,-1}, {1,1}, {0,1}};
-	    
-	    counter=0; 
-        for(int i=0;i<n;i++){
-
-    		
-    		for(int j=0;j<n;j++){ 
-    			
-    			if(board[i][j]=="X"||board[i][j]=="O"){
-    			  counter=counter+1; 
-    			}
-    			if(board[i][j]==" "){
-    			  counter=counter+0; 
-    			}
-    			if(counter==(n*n)){
-    			  setWinner("D"); 
-    		      return winner="D"; 
-    		      
-    			}
-    			}
-    		}
-	    
 	    for (int[] d : directions) {
 
 	    	int dx = d[0];
@@ -154,15 +126,33 @@ public String checkwin(String board[][]){
 	            }
 	          
 	        }
+	        counter=0; 
+	        for(int i=0;i<n;i++){
+
+	    		
+	    		for(int j=0;j<n;j++){ 
+	    			
+	    			if(board[i][j]=="X"||board[i][j]=="O"){
+	    			  counter=counter+1; 
+	    			}
+	    			if(board[i][j]==" "){
+	    			  counter=counter+0; 
+	    			}
+	    			if(counter==(n*n)){
+	    			  setWinner("D"); 
+	    		      return winner="D"; 
+	    		      
+	    			}
+	    			}
+	    		}
+	        
 	        
 	    }
 	    return " "; 
 	}
 
-public static void setWinner(String string){
-	
+private static void setWinner(String string){
 	victory=string; 
-	
 }
 
 public static String getWinner(){
@@ -171,7 +161,7 @@ public static String getWinner(){
 	
 }
 	
-public boolean addCoordinatate(int x,int y )
+private boolean addCoordinatate(int x,int y )
 {
 if(board[x][y]!=" ")
 {
@@ -185,7 +175,7 @@ return true;
 
 }
 
-public String winnerIs(){ 
+private String winnerIs(){ 
 
 	if (checkwin(board)=="X")
 	{
@@ -212,7 +202,7 @@ public String winnerIs(){
 	return winner; 
 }
 
-public void scoreBoard(String name){
+private void scoreBoard(String name){
 	 
 	ArrayList<String>userName=new ArrayList<String>(); 
 	score=new ArrayList<Integer>(); 
@@ -281,10 +271,10 @@ public String nextPlayer(){
 public void opponentMove(){
 
 	
-	if (Options.getOpponent().equals(Player.AI)){
+	if (Options.getOpponent().equals(Enum.AI.string())){
 		AImove ai =new AImove(); 
 	}
-	if (Options.getOpponent().equals(Player.HUMAN)){
+	if (Options.getOpponent().equals(Enum.HUMAN.string())){
 		nextPlayer(); 
 	}
 	

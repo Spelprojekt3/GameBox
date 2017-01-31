@@ -11,7 +11,7 @@ import gamebox.GameBox;
 import gamebox.GameState;
 import gamebox.SlidePuzzle;
 import gamebox.TicTacToe;
-import model.Enum.Player.Board;
+import model.Enum;
 import model.Game;
 import model.SlidePuzzleModel;
 import model.TicTacToeModel;
@@ -110,7 +110,7 @@ private Controller(int gameNumber)throws GameException{
 	}
 	
 	if(gameNumber==2){
-	View view= new View(Board.SIZE);
+	View view= new View(4);
 	game = SlidePuzzleModel.getInstance();
 	GameState state= new SlidePuzzle(box); 
 	box.setGameState(state);

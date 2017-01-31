@@ -1,7 +1,9 @@
 package gamebox;
 import controller.*;
+
 import exception.GameException;
-import model.Enum.Player.Game;
+
+import model.Enum;
 import model.TicTacToeModel;
 import view.Options;
 import view.View;
@@ -26,8 +28,8 @@ public TicTacToe(GameBox gameBox){
  */
 	@Override
 	public void run() throws GameException {
-	System.out.println("TicTacToe is running");
-	Controller controller =Controller.getInstance(Game.TICTACTOE);
+	System.out.println("TicTacToe is runing");
+	Controller controller =Controller.getInstance(Enum.TICTACTOE.value());
 	}
 /**
  * Exits TicTacToe

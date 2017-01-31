@@ -1,31 +1,32 @@
 package model;
 
 
+public enum Enum{	
 
 
-public enum  Enum{
 	
+AI("O"),HUMAN("X"),SIZE(4),TICTACTOE(1),SLIDEPUZZLE(2); 
 
-AI,HUMAN,SIZE,SIZES,TICTACTOE,SLIDEPUZZLE; 
+private String string;
+private int value;
+
+Enum(String string){
 	
-
-
-public class Player{
-
-public static final String HUMAN="X"; 
-public static final String AI="O"; 
-	
-
-public class Board{
-	
-public static final int SIZE=4;
-}
-public class Game{
-
-public static final int TICTACTOE=1; 
-public static final int SLIDEPUZZLE=2; 		
-}
+	this.string=string; 	
 }
 
+Enum(int value){
+	this.value=value;
+}
+
+public int value(){
+	return value; 	
+}
+	
+public String string(){
+	return string;
+}
 
 }
+
+

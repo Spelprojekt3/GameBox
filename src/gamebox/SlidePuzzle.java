@@ -1,8 +1,9 @@
 package gamebox;
 
 import controller.*;
+
 import exception.GameException;
-import model.Enum.Player.Game;
+import model.Enum;
 import model.SlidePuzzleModel;
 import model.TicTacToeModel;
 import view.Options;
@@ -31,7 +32,9 @@ public SlidePuzzle(GameBox gameBox){
 	@Override
 	public void run() throws GameException {
 		System.out.println("SlidePuzzle is running");
-		Controller controller = Controller.getInstance(Game.SLIDEPUZZLE);	
+
+		Controller controller = Controller.getInstance(Enum.SLIDEPUZZLE.value());	
+
 	}
 /**
  * Exits SlidePuzzle game 
