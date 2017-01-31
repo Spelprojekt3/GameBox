@@ -24,7 +24,6 @@ public class View {
 private JPanel topPanel,bottomPanel,centerPanel,westPanel,eastPanel; 
 private JButton[][] gameButtons;
 public JButton[] mainButtons; 
-private static View firstInstance = null; 
 private JButton exitButton; 
 private Options option =new Options(); 
 private static JFrame mainframe; 
@@ -48,11 +47,7 @@ public static void closeWindow(){
 	
 }
 
-public static void setInstance(){
-		
-		firstInstance =null; 
-	
-}
+
 public void createWindow() {
 	
 	

@@ -23,8 +23,7 @@ public class Controller
 {
 	GameButtonListener gamebuttonlistner; 
 	View view; 	 
-	Game game; 
-	GameState state;
+	Game game;  
 	GameBox box; 
 	Options option; 
 	private static Controller firstInstance = null; 
@@ -40,7 +39,7 @@ public static Controller getInstance(int i) throws GameException{
 	return firstInstance; 
 }
 
-public void updateView(View view){
+private void updateView(View view){
 
 	 for(int i=0; i< view.getGameButtons().length;i++)
 	 {  
@@ -73,34 +72,30 @@ public static void endGameIfWin(Game game, View view) throws GameException{
 private Controller(int gameNumber)throws GameException{
 
 	
-
+	
 	box =new GameBox();
 	option =new Options(); 
 	
 	if(gameNumber==1){
-
+    
 	option.askBoardSize();
-
 	View view= new View(Options.getSize());
 	game = TicTacToeModel.getInstance();
-	state=new TicTacToe();
+	GameState state= new TicTacToe(box); 
 	Options.askForOpponent(); 
 	box.setGameState(state);
-	
 	this.view=view; 
-    this.game=game; 
+    
 	}
 	
 	if(gameNumber==2){
 	View view= new View(Board.SIZE);
 	game = SlidePuzzleModel.getInstance();
-	state=new SlidePuzzle(); 
+	GameState state= new SlidePuzzle(box); 
 	box.setGameState(state);
 	updateView(view);
 	view.setButtonInvisible();
-	
 	this.view=view; 
-    this.game=game; 
 	}	
 	
 		  GameButtonListener gamebuttonlistener = new GameButtonListener(view,game);
@@ -119,14 +114,13 @@ private Controller(int gameNumber)throws GameException{
                     "Are you sure you want to exit?", null, JOptionPane.YES_NO_OPTION);
             if (confirmExit == JOptionPane.YES_OPTION) {
                 firstInstance=null; 
-                state.exit();   
+                box.exit(); 
             }
         });
 		
 }
 
-
-public static class GameButtonListener implements ActionListener {
+private static class GameButtonListener implements ActionListener {
 
 	    View view;
 	    Game game; 

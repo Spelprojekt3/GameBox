@@ -1,11 +1,8 @@
 package model;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-
 import controller.Controller;
-import controller.Update;
 import view.View;
 
 public class SlidePuzzleModel implements Game

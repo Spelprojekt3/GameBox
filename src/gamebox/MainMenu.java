@@ -8,7 +8,7 @@ public class MainMenu implements GameState {
 	
 
 	
-	public MainMenu(){		
+	public MainMenu(GameBox gameBox){		
 		 
 		System.out.println("MainMenu is online");
 	}

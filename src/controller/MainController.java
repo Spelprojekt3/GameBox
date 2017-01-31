@@ -24,17 +24,16 @@ import view.View;
 public class MainController {
 	
 	GameButtonListener gamebuttonlistener; 
-	MainMenu main; 
 	private static MainController firstInstance=null;
-	static GameBox box;
     private MainView mainview;
+    private static GameBox box = new GameBox();
     
 private MainController(){
 	
+	 
     mainview= new MainView(); 
-	GameBox box = new GameBox(); 
-	TicTacToe tGame= new TicTacToe(); 
-	SlidePuzzle sGame =new SlidePuzzle(); 
+	TicTacToe tGame= new TicTacToe(box); 
+	SlidePuzzle sGame =new SlidePuzzle(box); 
   
 	
 	
@@ -66,9 +65,8 @@ public static void main(String[] arg) throws GameException{
             ex.printStackTrace();
 } 
           
-       
-        MainMenu state= new MainMenu();
-        state.run(); 
+   
+        box.run();
         
         
 	}
