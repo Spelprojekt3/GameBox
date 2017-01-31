@@ -32,7 +32,9 @@ public SlidePuzzle(GameBox gameBox){
 	@Override
 	public void run() throws GameException {
 		System.out.println("SlidePuzzle is running");
+
 		Controller controller = Controller.getInstance(Enum.SLIDEPUZZLE.value());	
+
 	}
 /**
  * Exits SlidePuzzle game 

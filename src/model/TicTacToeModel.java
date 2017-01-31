@@ -1,10 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-
-
-
-
 import exception.GameException;
 import model.Enum;
 import view.Options;
@@ -108,7 +104,6 @@ private String checkwin(String board[][]){
 	String winner = "0"; 
 	int n =Options.getSize();
 	    int[][] directions = {{1,0}, {1,-1}, {1,1}, {0,1}};
-	    
 	    for (int[] d : directions) {
 
 	    	int dx = d[0];
@@ -157,9 +152,7 @@ private String checkwin(String board[][]){
 	}
 
 private static void setWinner(String string){
-	
 	victory=string; 
-	
 }
 
 public static String getWinner(){

@@ -24,8 +24,8 @@ import view.View;
 
 public class MainController {
 	
-	GameButtonListener gamebuttonlistener; 
-	private static MainController firstInstance=null;
+	  GameButtonListener gamebuttonlistener; 
+	  private static MainController firstInstance=null;
     private MainView mainview;
     private static GameBox box = new GameBox();
 /**
@@ -121,6 +121,7 @@ public void actionPerformed(ActionEvent e) {
 	        	}
 	    }
 }
+
 
 
 
