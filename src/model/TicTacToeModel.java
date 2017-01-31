@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 
-import controller.Update;
+
 import exception.GameException;
 import model.Enum.Player;
 import view.Options;
@@ -16,11 +16,11 @@ public class TicTacToeModel implements Game{
 	private static int score1,score2,dscore1,dscore2,lscore1,lscore2; 
 	private ArrayList<Integer>score=new ArrayList<Integer>(); 
 	private ArrayList<Integer>dscore=new ArrayList<Integer>();
-	private View view; 
-	private  static TicTacToeModel firstInstance=null; 
+	private static TicTacToeModel firstInstance=null; 
 	private Options option = new Options(); 
 	private String[][] board = new String [option.getSize()][option.getSize()];
 	private String winner; 
+	private static String victory; 
 
 	
 public ArrayList<Integer> getScore() {
@@ -125,7 +125,9 @@ public String checkwin(String board[][]){
     			  counter=counter+0; 
     			}
     			if(counter==(n*n)){
+    			  setWinner("D"); 
     		      return winner="D"; 
+    		      
     			}
     			}
     		}
@@ -144,6 +146,7 @@ public String checkwin(String board[][]){
 	                                 && w == board[x+2*dx][y+2*dy] 
 	                                 && w == board[lastx][lasty]) {
 	                    	System.out.println("Winner");
+	                    	setWinner(w); 
 	                        return w;
 	                         
 	                    }
@@ -155,6 +158,18 @@ public String checkwin(String board[][]){
 	    }
 	    return " "; 
 	}
+
+public static void setWinner(String string){
+	
+	victory=string; 
+	
+}
+
+public static String getWinner(){
+	
+	return victory; 
+	
+}
 	
 public boolean addCoordinatate(int x,int y )
 {
@@ -303,15 +318,13 @@ public void setDscore(ArrayList<Integer> dscore) {
 @Override
 public boolean move(int i, int j) {
 	
-
-	if(addCoordinatate(i,j)==true && checkwin(board)!="X"){
+	if(addCoordinatate(i,j)==true && checkwin(board)==" "){
 	currentBoard();
 	opponentMove(); 
 	currentBoard();
 	}
 	else	
     currentBoard();
-
 	return true;
 	
 }
