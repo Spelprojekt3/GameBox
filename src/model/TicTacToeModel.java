@@ -3,9 +3,10 @@ package model;
 import java.util.ArrayList;
 
 
-import controller.Update;
+
+
 import exception.GameException;
-import model.Enum.Player;
+import model.Enum;
 import view.Options;
 import view.View;
 
@@ -16,11 +17,11 @@ public class TicTacToeModel implements Game{
 	private static int score1,score2,dscore1,dscore2,lscore1,lscore2; 
 	private ArrayList<Integer>score=new ArrayList<Integer>(); 
 	private ArrayList<Integer>dscore=new ArrayList<Integer>();
-	private View view; 
-	private  static TicTacToeModel firstInstance=null; 
+	private static TicTacToeModel firstInstance=null; 
 	private Options option = new Options(); 
 	private String[][] board = new String [option.getSize()][option.getSize()];
 	private String winner; 
+	private static String victory; 
 
 	
 public ArrayList<Integer> getScore() {
@@ -51,10 +52,6 @@ public static void reset(){
 private void newBoard()throws GameException{
 	
 	int x= option.getSize();
-	
-	if(x>10){
-		throw new GameException("Storleken är större än 10"); 
-	}
   
 	for(int s=0; s<x; s++){
 		
@@ -66,7 +63,7 @@ private void newBoard()throws GameException{
 };
 
 
-public String currentBoard(){
+private String currentBoard(){
 	
 	 int x=option.getSize(); 
 	 
@@ -106,29 +103,11 @@ private void printCol(){
 final int maxx=Options.getSize();
 final int maxy=Options.getSize();
 
-public String checkwin(String board[][]){
+private String checkwin(String board[][]){
   int counter =0; 
 	String winner = "0"; 
 	int n =Options.getSize();
 	    int[][] directions = {{1,0}, {1,-1}, {1,1}, {0,1}};
-	    
-	    counter=0; 
-        for(int i=0;i<n;i++){
-
-    		
-    		for(int j=0;j<n;j++){ 
-    			
-    			if(board[i][j]=="X"||board[i][j]=="O"){
-    			  counter=counter+1; 
-    			}
-    			if(board[i][j]==" "){
-    			  counter=counter+0; 
-    			}
-    			if(counter==(n*n)){
-    		      return winner="D"; 
-    			}
-    			}
-    		}
 	    
 	    for (int[] d : directions) {
 
@@ -144,6 +123,7 @@ public String checkwin(String board[][]){
 	                                 && w == board[x+2*dx][y+2*dy] 
 	                                 && w == board[lastx][lasty]) {
 	                    	System.out.println("Winner");
+	                    	setWinner(w); 
 	                        return w;
 	                         
 	                    }
@@ -151,12 +131,44 @@ public String checkwin(String board[][]){
 	            }
 	          
 	        }
+	        counter=0; 
+	        for(int i=0;i<n;i++){
+
+	    		
+	    		for(int j=0;j<n;j++){ 
+	    			
+	    			if(board[i][j]=="X"||board[i][j]=="O"){
+	    			  counter=counter+1; 
+	    			}
+	    			if(board[i][j]==" "){
+	    			  counter=counter+0; 
+	    			}
+	    			if(counter==(n*n)){
+	    			  setWinner("D"); 
+	    		      return winner="D"; 
+	    		      
+	    			}
+	    			}
+	    		}
+	        
 	        
 	    }
 	    return " "; 
 	}
+
+private static void setWinner(String string){
 	
-public boolean addCoordinatate(int x,int y )
+	victory=string; 
+	
+}
+
+public static String getWinner(){
+	
+	return victory; 
+	
+}
+	
+private boolean addCoordinatate(int x,int y )
 {
 if(board[x][y]!=" ")
 {
@@ -170,7 +182,7 @@ return true;
 
 }
 
-public String winnerIs(){ 
+private String winnerIs(){ 
 
 	if (checkwin(board)=="X")
 	{
@@ -197,7 +209,7 @@ public String winnerIs(){
 	return winner; 
 }
 
-public void scoreBoard(String name){
+private void scoreBoard(String name){
 	 
 	ArrayList<String>userName=new ArrayList<String>(); 
 	score=new ArrayList<Integer>(); 
@@ -266,10 +278,10 @@ public String nextPlayer(){
 public void opponentMove(){
 
 	
-	if (Options.getOpponent().equals(Player.AI)){
+	if (Options.getOpponent().equals(Enum.AI.string())){
 		AImove ai =new AImove(); 
 	}
-	if (Options.getOpponent().equals(Player.HUMAN)){
+	if (Options.getOpponent().equals(Enum.HUMAN.string())){
 		nextPlayer(); 
 	}
 	
@@ -303,15 +315,13 @@ public void setDscore(ArrayList<Integer> dscore) {
 @Override
 public boolean move(int i, int j) {
 	
-
-	if(addCoordinatate(i,j)==true && checkwin(board)!="X"){
+	if(addCoordinatate(i,j)==true && checkwin(board)==" "){
 	currentBoard();
 	opponentMove(); 
 	currentBoard();
 	}
 	else	
     currentBoard();
-
 	return true;
 	
 }

@@ -3,6 +3,8 @@ package controller;
 
 import java.awt.event.ActionEvent;
 
+
+
 import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
@@ -23,16 +25,18 @@ import view.View;
 public class MainController {
 	
 	GameButtonListener gamebuttonlistener; 
-	MainMenu main; 
 	private static MainController firstInstance=null;
-	static GameBox box;
-	
+    private MainView mainview;
+    private static GameBox box = new GameBox();
+/**
+ * Constructor of the main 
+ */
 private MainController(){
 	
-	MainView mainview= new MainView(); 
-	GameBox box = new GameBox(); 
-	TicTacToe tGame= new TicTacToe(); 
-	SlidePuzzle sGame =new SlidePuzzle(); 
+	 
+    mainview= new MainView(); 
+	TicTacToe tGame= new TicTacToe(box); 
+	SlidePuzzle sGame =new SlidePuzzle(box); 
   
 	
 	
@@ -54,7 +58,11 @@ public static MainController getInstance(){
 	}
 	return firstInstance; 
 }
-
+/**
+ * Main method of the game 
+ * @param arg
+ * @throws GameException
+ */
 public static void main(String[] arg) throws GameException{
         try {
             // select Look and Feel
@@ -64,8 +72,8 @@ public static void main(String[] arg) throws GameException{
             ex.printStackTrace();
 } 
           
-        GameState main= new MainMenu(); 
-        main.run();
+   
+        box.run();
         
         
 	}

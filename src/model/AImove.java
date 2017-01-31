@@ -4,7 +4,11 @@ import java.util.Random;
 
 import exception.GameException;
 import view.Options;
-
+/**
+ * Class that sets a move on the board of TicTacToeModel
+ * @author Marcus,Christoffer
+ * 
+ */
 public class AImove{
 
 TicTacToeModel model; 
@@ -24,7 +28,11 @@ public AImove(){
 	makeMove(createRandom(k)); 
 }
 
-
+/**
+ * Creates random number
+ * @param k is the number of available positions in the board 
+ * @return the random number 
+ */
 public int createRandom(int k){
 	
 	Random rand= new Random(); 
@@ -33,7 +41,10 @@ public int createRandom(int k){
 	return nummer; 
 	
 }
- 
+/**
+ *Finds available spots and stores its coordinates  
+ * @return the number of the available spots 
+ */
 
 public int analyseBoard(){
 	
@@ -62,7 +73,10 @@ public int analyseBoard(){
 	return k; 
 }
 
-
+/**
+ * sets the letter O on a spot on the board 
+ * @param nummer
+ */
 
 public void makeMove(int nummer)
 {

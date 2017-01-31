@@ -1,9 +1,12 @@
 package view;
 
 import javax.swing.JOptionPane;
-
-import model.Enum.Player;
-
+import model.Enum;
+/**
+ * Handles inputs from the user  
+ * @author Marcus, Christoffer 
+ *
+ */
 public class Options {
 
 
@@ -15,6 +18,10 @@ public static int size;
 
 String message; 
 private static String opponent;
+/**
+ * Asks if the opponent should bee a computer or a human player
+ * @return the  chosen opponent  
+ */
 
 public static String askForOpponent()
 {
@@ -27,15 +34,15 @@ public static String askForOpponent()
 
 	        if(choice == JOptionPane.YES_OPTION)
 	        {
-	            opponent=Player.HUMAN;
+	            opponent=Enum.HUMAN.string();
 	        }
 	        else if(choice == JOptionPane.NO_OPTION)
 	        {
-	            opponent =Player.AI;
+	            opponent=Enum.AI.string();
 	        }
 	        else if(choice == JOptionPane.CLOSED_OPTION)
 	        {
-	            opponent = Player.HUMAN;
+	            opponent=Enum.HUMAN.string();
 	        }
 	        return opponent;
 	    }
@@ -48,12 +55,17 @@ public static String askForOpponent()
 	    
 
 	 
-
+/**
+ * Size of the TicTacToe board
+ * @return the size as an integer
+ */
 public static int getSize(){
 	
 return size; 
 }
-  
+ /**
+  * Asks the user to choose the size of the TicTacToe-board 
+  */
 public void askBoardSize()
 {
    
@@ -63,17 +75,35 @@ public void askBoardSize()
         JOptionPane.QUESTION_MESSAGE, 
         null, 
         sizeS,null);
+        if(choise ==null){
+        JOptionPane.getRootFrame().dispose();   
+        }
         size= Integer.parseInt(choise); 
         System.out.println("Size was: "+size);      
 }
 
-public void showWinner()
+public static void showWinner(String winner)
 {
+	String winnerO="Winner is player O",winnerX="Winner is player X",winnerD="It´s a tie!" 
+	,winnerS="Congratulations, you have solved the puzzle";
+	if(winner=="X")
+	{
+	JOptionPane.showMessageDialog(null, winnerX);
+	}
+	if(winner=="O")
+	{
+	JOptionPane.showMessageDialog(null, winnerO);	
+	}
+	if(winner=="D")
+	{
+	JOptionPane.showMessageDialog(null, winnerD);	
+	}
+	if(winner=="WS")
+	{
+	JOptionPane.showMessageDialog(null,winnerS);
+	}
 	
 }
-
-
-
 
 
 
